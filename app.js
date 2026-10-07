@@ -86,10 +86,11 @@
     const story = stories.find(item => item.id === id);
     current = story || null;
     const isMeals = /^#meals(?:\/day\/\d+)?$/.test(location.hash);
+    const enteringMeals = isMeals && $('meals').hidden;
     $('library').hidden = !!story || isMeals; $('reader').hidden = !story; $('meals').hidden = !isMeals;
     $('stories-nav').toggleAttribute('aria-current', !isMeals); $('meals-nav').toggleAttribute('aria-current', isMeals);
     if (!isMeals) $('stories-nav').setAttribute('aria-current', 'page'); else $('meals-nav').setAttribute('aria-current', 'page');
-    if (isMeals) { restoring = false; document.title = '42 天月子餐 · Baby'; window.scrollTo(0, 0); return; }
+    if (isMeals) { restoring = false; document.title = '42 天月子餐 · Baby'; if (enteringMeals) window.scrollTo(0, 0); return; }
     if (!story) { restoring = false; document.title = 'Baby · 育儿与陪伴'; render(); window.scrollTo(0, 0); if (id) { toast('这个故事不存在，已返回书架。'); history.replaceState(null, '', location.pathname + location.search); } return; }
     const previous = records[id] || { progress: 0, read: false };
     records[id] = { ...previous, openedAt: Date.now() }; save();
