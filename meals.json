@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "id": "xiachufang-106399513",
+      "title": "30天月子餐记录",
+      "author": "Erin-1122",
+      "kind": "菜单记录",
+      "ingredients": [
+        "2个鸡蛋",
+        "适量蔬菜",
+        "丝瓜",
+        "莴苣",
+        "适量肉类",
+        "一条鲫鱼",
+        "2盅汤",
+        "木瓜",
+        "牛奶"
+      ],
+      "source": "下厨房",
+      "sourceUrl": "https://m.xiachufang.com/recipe/106399513/",
+      "publishedAt": "2021-04-29T17:22:44",
+      "fetchedAt": "2026-10-06T09:17:02.080Z"
+    },
+    {
+      "id": "xiachufang-106548108",
+      "title": "月子餐记录",
+      "author": "克里斯丁丁丁丁",
+      "kind": "菜单记录",
+      "ingredients": [
+        "清淡饮食"
+      ],
+      "source": "下厨房",
+      "sourceUrl": "https://m.xiachufang.com/recipe/106548108/",
+      "publishedAt": "2021-09-17T19:52:04",
+      "fetchedAt": "2026-10-06T09:17:02.080Z"
+    },
+    {
+      "id": "xiachufang-107167325",
+      "title": "月子餐",
+      "author": "努力尝试吃各种肉的圆滚滚",
+      "kind": "菜单记录",
+      "ingredients": [
+        "若干鸡肉",
+        "若干鸡蛋",
+        "若干瘦肉",
+        "若干蔬菜",
+        "若干排骨",
+        "若干鱼"
+      ],
+      "source": "下厨房",
+      "sourceUrl": "https://m.xiachufang.com/recipe/107167325/",
+      "publishedAt": "2023-07-28T20:43:45",
+      "fetchedAt": "2026-10-06T09:17:02.080Z"
+    },
+    {
+      "id": "xiachufang-107135380",
+      "title": "8万月子中心30天月子餐",
+      "author": "米2线线线线",
+      "kind": "菜单记录",
+      "ingredients": [
+        "低盐",
+        "低糖"
+      ],
+      "source": "下厨房",
+      "sourceUrl": "https://m.xiachufang.com/recipe/107135380/",
+      "publishedAt": "2023-06-07T08:01:11",
+      "fetchedAt": "2026-10-06T09:17:02.080Z"
+    }
+  ],
+  "updatedAt": "2026-10-06T09:17:02.080Z",
+  "attemptedAt": "2026-10-06T09:17:02.080Z",
+  "failures": [],
+  "successful": 4
+}

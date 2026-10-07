@@ -1,2 +1,7 @@
-# baby-reading-meals
-Baby · 100 stories and a 42-day postpartum meal plan with nutrition sources.
+# Baby
+
+100 篇按阅读日排序的故事、42 天产后菜单（哺乳与不哺乳模式）、详细做法和营养资料来源。
+
+这是独立静态阅读站，保留收藏、阅读历史和字体设置。社区菜谱使用已有公开资料缓存；实时采集需单独部署后端。
+
+故事用于亲子交流，不承诺胎教提升智力；菜单是营养估算示例，非个体处方。
