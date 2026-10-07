@@ -21,7 +21,7 @@
   plan.recipes['tofu-simple'] = {id:'tofu-simple',name:'清蒸石膏豆腐',minutes:15,servings:1,ingredients:['石膏豆腐 100 克','水 20 毫升'],
     steps:['选择标明硫酸钙（石膏）凝固剂的正规豆腐，核对保质期，切约 1 厘米厚片。','放耐热盘中，加水，蒸锅水开后上锅蒸约 10～12 分钟。','确认豆腐完全热透后食用；不额外加盐，搭配当天蔬菜。'],allergens:['大豆'],tip:'钙估算对应 USDA 的石膏豆腐条目；不同产品钙含量差异很大，以实物营养标签为准。'};
   for (const recipe of Object.values(plan.recipes)) {
-    recipe.ingredients = recipe.ingredients.map(line => line.replace(/北豆腐|嫩豆腐/g,'石膏豆腐').replace('无盐核桃仁或杏仁 15 克','无盐核桃仁 10 克').replace('干红扁豆','干红小扁豆').replace('巴氏杀菌牛奶','巴氏杀菌全脂牛奶').replace('原味无糖酸奶','原味无糖全脂酸奶').replace('干面条','干蛋面').replace('去皮去骨鸡肉','去皮鸡胸肉').replace(/^牛肉/,'瘦牛肉').replace('猪瘦肉末','猪里脊肉末').replace('食盐','加碘食盐'));
+    recipe.ingredients = recipe.ingredients.map(line => line.replace(/北豆腐|嫩豆腐/g,'石膏豆腐').replace('无盐核桃仁或杏仁 15 克','无盐核桃仁 10 克').replace('干红扁豆','干红小扁豆').replace('巴氏杀菌牛奶','巴氏杀菌全脂牛奶').replace('原味无糖酸奶','原味无糖全脂酸奶').replace('干面条','干蛋面').replace('去皮去骨鸡肉','去皮鸡胸肉').replace(/^牛肉/,'瘦牛肉').replace('猪瘦肉末','猪里脊肉末').replace(/^食盐/,'加碘食盐'));
     recipe.steps = recipe.steps.map(line => line.replace('称取 15 克','称取上列分量').replace('取约 150 克可食果肉','取上列分量的可食果肉'));
     if (recipe.ingredients.some(line => line.startsWith('石膏豆腐'))) recipe.tip = (recipe.tip ? recipe.tip+' ' : '') + '选硫酸钙凝固的豆腐；钙估算不适用于所有卤水或内酯豆腐。';
   }
@@ -48,10 +48,10 @@
     const ingredients = items.map(item => `${item.label} ${round(item.amount)} ${item.unit}${item.unit==='个'?'（约 50 克可食部/个）':''}`);
     // Rice water amounts in original prose are replaced when grain portions change.
     let steps = original.steps.map(line => line.replace(/(?:加入)?(?:约 )?(120|130|140) 毫升水/g,'按上列水量加水'));
-    if (['rice','mixed-rice','millet-rice','pumpkin-rice'].includes(id)) {
-      const grain = items.filter(item => ['rice','brown-rice','millet'].includes(item.foodKey)).reduce((sum,item)=>sum+item.grams,0);
+    if (['rice','mixed-rice','millet-rice','pumpkin-rice','oat-rice','corn-rice','yam-rice','wheat-noodles','bun'].includes(id)) {
+      const grain = items.filter(item => ['rice','brown-rice','millet','oats','wheat'].includes(item.foodKey)).reduce((sum,item)=>sum+item.grams,0);
       const water = items.find(item=>!item.foodKey);
-      water.amount=water.grams=Math.round(grain*(id==='mixed-rice'?1.75:1.5));
+      water.amount=water.grams=Math.round(grain*(id==='wheat-noodles'?0.6:id==='bun'?1.3:['mixed-rice','corn-rice'].includes(id)?1.85:1.7));
       ingredients[items.indexOf(water)] = `水 约 ${water.amount} 毫升（以设备刻度和米种调整）`;
     }
     return {...original,ingredients,steps,items};
@@ -68,62 +68,111 @@
     }
     return totals;
   };
+
+  const animalKeys = ['chicken','beef','beef-mince','pork','salmon','cod'];
+  const grainKeys = ['rice','brown-rice','millet','oats','wheat','noodles'];
+  const wholeKeys = ['brown-rice','millet','oats','wheat'];
+  const darkKeys = ['carrot','pumpkin','spinach','broccoli','bok-choy','lettuce'];
+  const soySides = ['soy-tomato','soy-shiitake','soy-pumpkin','soy-spinach','soy-broccoli','soy-napa'];
+  const allItems = meals => meals.flatMap(meal=>meal.recipes.flatMap(recipe=>recipe.items));
+  function measures(meals) {
+    const items = allItems(meals), grams = keys => items.filter(item=>keys.includes(item.foodKey)).reduce((sum,item)=>sum+item.grams,0);
+    const family = {'beef-mince':'beef','brown-rice':'rice','bread':'wheat','noodles':'wheat','yogurt':'milk'};
+    const foods = [...new Set(items.filter(item=>item.foodKey&&!['oil','salt','ginger','starch'].includes(item.foodKey)).map(item=>family[item.foodKey]||item.foodKey))];
+    const groups={};
+    for (const item of items) if(item.foodKey){const group=data.foods[item.foodKey].group;groups[group]=(groups[group]||0)+item.grams;}
+    return {groups,foods,foodCount:foods.length,vegetables:groups['蔬菜']||0,darkVegetables:grams(darkKeys),wholeGrains:grams(wholeKeys),wholeGrainsAndBeans:grams([...wholeKeys,'lentil']),dryGrains:grams(grainKeys),fish:grams(['salmon','cod']),dairy:grams(['milk','yogurt']),soy:grams(['tofu']),egg:grams(['egg']),nuts:grams(['walnut'])};
+  }
   function buildDay(dayNumber,profile='lactating') {
     if (!['lactating','nonlactating'].includes(profile)) throw new Error('Unknown profile');
     const source=plan.days[dayNumber-1];
     if (!source) throw new Error('Invalid day');
     const selected=source.meals.map(meal=>({...meal,recipeIds:[...meal.recipeIds]}));
-    // Three low-mercury fish meals per week, each 100 g edible raw fish (~300 g/week).
-    if (dayNumber%7===0) selected[2].recipeIds[1]=dayNumber%14===0?'salmon':'cod';
-    // Whole grains in every lunch; daily dinner starch remains varied.
-    selected[2].recipeIds[0]='mixed-rice';
-    if (selected[4].recipeIds[0]==='rice') selected[4].recipeIds[0]='millet-rice';
     if (selected[0].recipeIds[0]==='sweet-potato') selected[0].recipeIds.push('bun');
-    const laterEgg = selected.slice(2).some(meal=>meal.recipeIds.some(id=>plan.recipes[id].ingredients.some(line=>line.startsWith('鸡蛋 '))));
-    if (laterEgg) selected[0].recipeIds=selected[0].recipeIds.filter(id=>!['boiled-egg','egg-custard'].includes(id));
-    const mainIds=[selected[2].recipeIds[1],selected[4].recipeIds[1]];
-    const animals=mainIds.filter(id=>plan.recipes[id].ingredients.some(line=>/^(去皮鸡胸肉|鸡胸肉|瘦牛肉|瘦牛肉末|猪里脊肉|猪里脊肉末|三文鱼|鳕鱼) /.test(line)));
-    const fishPresent=animals.some(id=>['salmon','cod'].includes(id));
-    let meals=selected.map(meal=>({...meal,recipes:meal.recipeIds.map(id=>{
+    const eggAfterBreakfast = selected.slice(2).some(meal=>meal.recipeIds.some(id=>plan.recipes[id].ingredients.some(line=>line.startsWith('鸡蛋 '))));
+    if (eggAfterBreakfast) selected[0].recipeIds=selected[0].recipeIds.filter(id=>!['boiled-egg','egg-custard','tomato-egg-breakfast','shiitake-egg-breakfast','spinach-egg-breakfast'].includes(id));
+    const mainIds = [selected[2].recipeIds[1],selected[4].recipeIds[1]];
+    const animals = mainIds.filter(id=>plan.recipes[id].ingredients.some(line=>/^(去皮鸡胸肉|鸡胸肉|瘦牛肉|瘦牛肉末|猪里脊肉|猪里脊肉末|三文鱼|鳕鱼) /.test(line)));
+    const isFish = id => plan.recipes[id].ingredients.some(line=>/^(三文鱼|鳕鱼) /.test(line));
+    const fishPresent = animals.some(isFish);
+    let meals = selected.map((meal,mealIndex)=>({...meal,recipes:meal.recipeIds.map(id=>{
       const changes={};
-      if (id==='milk'||id==='oats') changes.milk=150;
-      if (id==='nuts') changes.walnut=10;
-      if (id==='sweet-potato') changes['sweet-potato']=100;
-      if (['rice','pumpkin-rice','noodles'].includes(id)) changes[id==='noodles'?'noodles':'rice']=75;
-      if (id==='mixed-rice') {changes.rice=40; changes['brown-rice']=35;}
-      if (id==='millet-rice') {changes.rice=40; changes.millet=35;}
-      if (animals.includes(id)) {
-        const grams=['salmon','cod'].includes(id)?100:animals.length===2?(fishPresent?50:75):125;
-        for(const foodKey of ['chicken','beef','beef-mince','pork','salmon','cod']) changes[foodKey]=grams;
+      if (plan.recipes[id].ingredients.some(line=>line.startsWith('巴氏杀菌全脂牛奶 '))) changes.milk=150;
+      if (plan.recipes[id].ingredients.some(line=>line.startsWith('无盐核桃仁 '))) changes.walnut=10;
+      if(id==='sweet-potato')changes['sweet-potato']=100;
+      if (mealIndex===2||mealIndex===4) {
+        const starch=id===meal.recipeIds[0];
+        if(starch) {
+          if(id==='mixed-rice'||id==='corn-rice'){changes.rice=40;changes['brown-rice']=35;}
+          else if(id==='millet-rice'||id==='yam-rice'){changes.rice=40;changes.millet=35;}
+          else if(id==='oat-rice'){changes.rice=40;changes.oats=35;}
+          else if(id==='wheat-noodles'||id==='bun')changes.wheat=50;
+          else if(id==='noodles')changes.noodles=75;
+          else changes.rice=75;
+        }
       }
-      if (['tofu-tomato','tofu-mushroom','tofu-egg'].includes(id)) changes.tofu=150;
+      if (animals.includes(id)) {
+        const amount=isFish(id)?100:animals.length===2?(fishPresent?50:75):125;
+        for (const key of animalKeys) changes[key]=amount;
+      }
+      if(mainIds.includes(id)&&plan.recipes[id].ingredients.some(line=>line.startsWith('石膏豆腐 ')))changes.tofu=150;
       return recipeFor(id,changes);
     })}));
-    const tofu=meals.flatMap(meal=>meal.recipes.flatMap(recipe=>recipe.items)).filter(item=>item.foodKey==='tofu').reduce((sum,item)=>sum+item.grams,0);
-    if(tofu<100) meals[2].recipes.push(recipeFor('tofu-simple',{tofu:100-tofu}));
-    // Include vegetables in main dishes and soups, not just the two side dishes.
-    const vegetableGrams=meals.flatMap(meal=>meal.recipes.flatMap(recipe=>recipe.items)).filter(item=>item.foodKey&&data.foods[item.foodKey].group==='蔬菜').reduce((sum,item)=>sum+item.grams,0);
+    // Mix coarse and refined grains instead of maximizing fiber. Keep dry whole grains + pulses around 50–150 g in these reference portions.
+    let surplus=Math.max(0,allItems(meals).filter(item=>[...wholeKeys,'lentil'].includes(item.foodKey)).reduce((sum,item)=>sum+item.grams,0)-150);
     meals=meals.map(meal=>({...meal,recipes:meal.recipes.map(recipe=>{
-      const changes=Object.fromEntries(recipe.items.filter(item=>item.foodKey).map(item=>[item.foodKey,item.grams*(data.foods[item.foodKey].group==='蔬菜'?500/vegetableGrams:1)]));
+      if(!surplus||!recipe.items.some(item=>item.foodKey==='rice'))return recipe;
+      const whole=recipe.items.filter(item=>wholeKeys.includes(item.foodKey));
+      const amount=whole.reduce((sum,item)=>sum+item.grams,0);
+      if(!amount)return recipe;
+      const reduction=Math.min(surplus,Math.max(0,amount-10));
+      surplus-=reduction;
+      const changes=Object.fromEntries(recipe.items.filter(item=>item.foodKey).map(item=>[item.foodKey,item.grams+(item.foodKey==='rice'?reduction:wholeKeys.includes(item.foodKey)?-reduction*item.grams/amount:0)]));
+      return recipeFor(recipe.id,changes);
+    })}));
+    if(surplus>0.2)throw new Error('Unable to balance coarse grains');
+    const soy=allItems(meals).filter(item=>item.foodKey==='tofu').reduce((sum,item)=>sum+item.grams,0);
+    if (soy<100) meals[2].recipes.push(recipeFor(soySides[(dayNumber-1)%soySides.length],{tofu:100-soy}));
+    // Count vegetables in all courses. Target about half dark vegetables, not a fixed side dish.
+    const items=allItems(meals);
+    const dark=items.filter(item=>darkKeys.includes(item.foodKey)).reduce((sum,item)=>sum+item.grams,0);
+    const other=items.filter(item=>item.foodKey&&data.foods[item.foodKey].group==='蔬菜'&&!darkKeys.includes(item.foodKey)).reduce((sum,item)=>sum+item.grams,0);
+    if(!dark||!other)throw new Error('Both vegetable groups are required');
+    meals=meals.map(meal=>({...meal,recipes:meal.recipes.map(recipe=>{
+      const changes=Object.fromEntries(recipe.items.filter(item=>item.foodKey).map(item=>[item.foodKey,item.grams*(item.foodKey==='salt'?0.9:data.foods[item.foodKey].group==='蔬菜'?(darkKeys.includes(item.foodKey)?250/dark:250/other):1)]));
       return recipeFor(recipe.id,changes);
     })}));
     const base=totalsOf(meals);
     if(profile==='lactating') {
-      // Add 30 g of dry grain at each main meal, 150 ml milk and 5 g walnuts.
-      for(const index of [2,4]) {
+      const riceMeals=[2,4].filter(index=>meals[index].recipes[0].items.some(item=>item.foodKey==='rice'));
+      if(!riceMeals.length)throw new Error('Missing rice meal for extra portion');
+      for(const index of riceMeals) {
         const recipe=meals[index].recipes[0];
-        const keys=recipe.items.filter(item=>['rice','brown-rice','millet','noodles'].includes(item.foodKey));
-        const grain=keys.reduce((sum,item)=>sum+item.grams,0);
-        const changes=Object.fromEntries(recipe.items.filter(item=>item.foodKey).map(item=>[item.foodKey,item.grams*(keys.includes(item)?(grain+30)/grain:1)]));
+        const grains=recipe.items.filter(item=>grainKeys.includes(item.foodKey));
+        const grain=grains.reduce((sum,item)=>sum+item.grams,0);
+        if(!grain)throw new Error('Missing dry grain in main meal');
+        const changes=Object.fromEntries(recipe.items.filter(item=>item.foodKey).map(item=>[item.foodKey,item.grams+(item.foodKey==='rice'?60/riceMeals.length:0)]));
         meals[index].recipes[0]=recipeFor(recipe.id,changes);
       }
       meals[1].recipes.push(recipeFor('milk',{milk:150}));
-      meals[3].recipes=meals[3].recipes.map(recipe=>recipe.id==='nuts'?recipeFor('nuts',{walnut:15}):recipe);
+      let added=false;
+      meals=meals.map(meal=>({...meal,recipes:meal.recipes.map(recipe=>{
+        if(added||!recipe.items.some(item=>item.foodKey==='walnut'))return recipe;
+        added=true;
+        const changes=Object.fromEntries(recipe.items.filter(item=>item.foodKey).map(item=>[item.foodKey,item.grams+(item.foodKey==='walnut'?5:0)]));
+        return recipeFor(recipe.id,changes);
+      })}));
+      if(!added)throw new Error('Missing nut portion');
     }
-    const nutrients=totalsOf(meals);
-    const groups={};
-    for(const item of meals.flatMap(meal=>meal.recipes.flatMap(recipe=>recipe.items))) if(item.foodKey){const group=data.foods[item.foodKey].group;groups[group]=(groups[group]||0)+item.grams;}
-    return {...source,profile,meals,nutrients,groups,extraKcal:nutrients.kcal-base.kcal};
+    const nutrients=totalsOf(meals),quality=measures(meals);
+    return {...source,profile,meals,nutrients,groups:quality.groups,quality,extraKcal:nutrients.kcal-base.kcal};
   }
-  window.MEAL_NUTRITION={buildDay,totalsOf,metrics,foodData:data};
+  function weekSummary(week,profile='lactating') {
+    if(!Number.isInteger(week)||week<1||week>6)throw new Error('Invalid week');
+    const days=Array.from({length:7},(_,i)=>buildDay((week-1)*7+i+1,profile));
+    const foods=[...new Set(days.flatMap(day=>day.quality.foods))];
+    const fishMeals=days.flatMap(day=>day.meals).filter(meal=>meal.recipes.some(recipe=>recipe.items.some(item=>['salmon','cod'].includes(item.foodKey)))).length;
+    return {week,foodCount:foods.length,fishMeals,fishGrams:days.reduce((sum,day)=>sum+day.quality.fish,0),foods};
+  }
+  window.MEAL_NUTRITION={buildDay,totalsOf,metrics,foodData:data,weekSummary};
 })();

@@ -60,77 +60,2541 @@
   add('wintermelon-soup', '冬瓜香菇汤', 18, '去皮冬瓜 150 克|鲜香菇 50 克|水 300 毫升|食盐 0.3 克', '冬瓜去皮去瓤切小片，香菇洗净切片。|水煮沸放入两种食材。|小火煮约 10～12 分钟，至冬瓜半透明、香菇完全熟透。|加盐拌匀，放至适口温度。');
   add('egg-soup', '菠菜蛋花汤', 15, '菠菜 80 克|鸡蛋 1 个|水 300 毫升|食盐 0.3 克', '菠菜洗净切段，先用另一锅沸水焯约 1 分钟，沥水。|鸡蛋打散，汤锅水煮沸后倒入菠菜。|缓缓倒入蛋液，待凝固后再轻轻搅拌，继续煮约 2 分钟。|蛋液完全熟透后加盐出锅。', '蛋');
 
-  // Each explicit row represents one full day, not a repeated 7-day sample.
-  // Breakfast starch, lunch protein, lunch vegetable, dinner protein, dinner vegetable, soup.
+
+  // Recipe instructions are editorial home cooking; food composition remains traceable.
+  Object.assign(recipes, Object.fromEntries([
+  {
+    "id": "oat-rice",
+    "name": "燕麦杂粮饭",
+    "minutes": 35,
+    "servings": 1,
+    "ingredients": [
+      "大米 40 克",
+      "原味燕麦片 35 克",
+      "水 130 毫升"
+    ],
+    "steps": [
+      "大米淘洗，与原味燕麦片放入电饭煲。",
+      "按设备杂粮饭刻度加水；上列水量仅作起点。",
+      "煮熟后焖 5～10 分钟，确认米粒没有硬芯后翻松。"
+    ],
+    "allergens": [],
+    "tip": "份量按干谷物重量列出。",
+    "kind": "staple"
+  },
+  {
+    "id": "corn-rice",
+    "name": "玉米糙米饭",
+    "minutes": 45,
+    "servings": 1,
+    "ingredients": [
+      "大米 40 克",
+      "糙米 35 克",
+      "玉米粒 60 克",
+      "水 140 毫升"
+    ],
+    "steps": [
+      "糙米按包装说明冷藏浸泡，浸泡时间另计；大米淘洗。",
+      "将米、玉米与水放入电饭煲，使用杂粮饭模式。",
+      "煮好焖 10 分钟，确认糙米和玉米完全软熟。"
+    ],
+    "allergens": [],
+    "tip": "按设备刻度和米种调整水量。",
+    "kind": "staple"
+  },
+  {
+    "id": "wheat-noodles",
+    "name": "全麦面配玉米",
+    "minutes": 30,
+    "servings": 1,
+    "ingredients": [
+      "全麦粉 50 克",
+      "玉米粒 100 克",
+      "水 30 毫升"
+    ],
+    "steps": [
+      "全麦粉分次加水揉成较硬面团，盖好静置约 10 分钟。",
+      "玉米粒另用水煮至软熟；面团擀薄切成窄条。",
+      "沸水下面条，煮至中心没有生面芯，捞出沥水。",
+      "与熟玉米及当天主菜、蔬菜一起吃，不只喝面汤。"
+    ],
+    "allergens": [
+      "小麦"
+    ],
+    "tip": "全麦粉按干重、玉米按可食重量；煮面用水另计，不含能量。",
+    "kind": "staple"
+  },
+  {
+    "id": "yam-rice",
+    "name": "山药小米饭",
+    "minutes": 40,
+    "servings": 1,
+    "ingredients": [
+      "大米 40 克",
+      "小米 35 克",
+      "去皮山药 60 克",
+      "水 130 毫升"
+    ],
+    "steps": [
+      "山药戴手套去皮切小丁，米淘洗。",
+      "米、水与山药一起放入电饭煲，按设备刻度调整水。",
+      "煮好后焖 5～10 分钟，山药与谷物完全软熟后拌匀。"
+    ],
+    "allergens": [],
+    "tip": "山药成分使用数据库近似项，见科学依据。",
+    "kind": "staple"
+  },
+  {
+    "id": "savory-oats",
+    "name": "香菇青菜燕麦粥",
+    "minutes": 15,
+    "servings": 1,
+    "ingredients": [
+      "原味燕麦片 50 克",
+      "鲜香菇 40 克",
+      "小白菜 60 克",
+      "水 350 毫升",
+      "加碘食盐 0.2 克"
+    ],
+    "steps": [
+      "香菇切薄片，青菜逐叶洗净切碎。",
+      "水开后放香菇煮约 5 分钟，再加燕麦按包装煮软。",
+      "加入青菜煮至全熟，少量盐调味，不加糖。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "breakfast"
+  },
+  {
+    "id": "corn-milk-oats",
+    "name": "玉米牛奶燕麦粥",
+    "minutes": 15,
+    "servings": 1,
+    "ingredients": [
+      "原味燕麦片 40 克",
+      "玉米粒 60 克",
+      "巴氏杀菌全脂牛奶 150 毫升",
+      "水 200 毫升"
+    ],
+    "steps": [
+      "玉米粒与水先煮至熟软。",
+      "加入燕麦，小火按包装时间煮软并搅拌。",
+      "倒入牛奶加热至适口温度；不另加糖。"
+    ],
+    "allergens": [
+      "乳"
+    ],
+    "tip": "",
+    "kind": "breakfast"
+  },
+  {
+    "id": "pumpkin-wheat-cake",
+    "name": "南瓜全麦小饼",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "全麦粉 50 克",
+      "去皮南瓜 80 克",
+      "水 50 毫升",
+      "油 3 克"
+    ],
+    "steps": [
+      "南瓜切小块，蒸熟后压成泥。",
+      "加入全麦粉与水拌成可摊开的面糊，水量按吸水性调整。",
+      "锅中薄薄刷油，摊约 0.5 厘米厚的小饼，小火烙两面。",
+      "中心没有湿生面糊且完全熟透后食用。"
+    ],
+    "allergens": [
+      "小麦"
+    ],
+    "tip": "",
+    "kind": "breakfast"
+  },
+  {
+    "id": "sweet-potato-oats",
+    "name": "红薯燕麦粥",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "原味燕麦片 45 克",
+      "红薯 100 克",
+      "水 350 毫升"
+    ],
+    "steps": [
+      "红薯刷净去皮，切小丁。",
+      "与水煮至红薯软熟，再加入燕麦。",
+      "按包装时间煮至燕麦软熟，不加糖。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "breakfast"
+  },
+  {
+    "id": "yam-millet",
+    "name": "山药小米粥",
+    "minutes": 35,
+    "servings": 1,
+    "ingredients": [
+      "小米 55 克",
+      "去皮山药 80 克",
+      "水 550 毫升"
+    ],
+    "steps": [
+      "山药戴手套去皮切丁，小米淘洗。",
+      "水开后加入小米与山药，转小火煮约 25 分钟。",
+      "中间搅拌防粘，确认山药与米粒完全软熟。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "breakfast"
+  },
+  {
+    "id": "lentil-rice-porridge",
+    "name": "红小扁豆杂粮粥",
+    "minutes": 40,
+    "servings": 1,
+    "ingredients": [
+      "大米 25 克",
+      "小米 25 克",
+      "干红小扁豆 20 克",
+      "水 550 毫升"
+    ],
+    "steps": [
+      "谷物与干红小扁豆淘洗。",
+      "加水煮开，转小火煮约 30 分钟并搅拌。",
+      "谷物与小扁豆完全软熟后食用。"
+    ],
+    "allergens": [],
+    "tip": "用干红小扁豆 lentil，不能换成未煮熟的鲜扁豆荚。",
+    "kind": "breakfast"
+  },
+  {
+    "id": "corn-wheat-cake",
+    "name": "玉米全麦小饼",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "全麦粉 50 克",
+      "玉米粒 60 克",
+      "水 70 毫升",
+      "油 3 克"
+    ],
+    "steps": [
+      "玉米粒煮熟沥水，粗切碎。",
+      "拌入全麦粉与水，调成可缓慢流动的面糊。",
+      "平底锅薄刷油，摊薄小饼，小火烙两面。",
+      "中心没有生面糊且完全熟透再食用。"
+    ],
+    "allergens": [
+      "小麦"
+    ],
+    "tip": "",
+    "kind": "breakfast"
+  },
+  {
+    "id": "vegetable-noodle-breakfast",
+    "name": "青菜全麦面",
+    "minutes": 30,
+    "servings": 1,
+    "ingredients": [
+      "全麦粉 50 克",
+      "小白菜 60 克",
+      "鲜香菇 30 克",
+      "水 380 毫升",
+      "加碘食盐 0.2 克"
+    ],
+    "steps": [
+      "取约 30 毫升水与全麦粉揉成面团，盖好静置 10 分钟后擀薄切条。",
+      "其余水煮开，先放香菇煮熟，再下面条与青菜。",
+      "煮至面条无生芯、蔬菜熟透，加少量盐；连面与菜一起吃。"
+    ],
+    "allergens": [
+      "小麦"
+    ],
+    "tip": "",
+    "kind": "breakfast"
+  },
+  {
+    "id": "chicken-pumpkin",
+    "name": "南瓜蒸鸡片",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "鸡胸肉 120 克",
+      "去皮南瓜 120 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，肉切薄片，生熟刀具分开。",
+      "将肉、菜、油、盐与水拌匀，平铺耐热浅盘，不堆太厚。",
+      "蒸锅水开后放入，蒸至蔬菜和肉中心全熟。",
+      "用食品温度计确认最厚鸡肉中心达到 74℃；食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间是估计；不冲洗生鸡肉。",
+    "kind": "main"
+  },
+  {
+    "id": "chicken-napa",
+    "name": "白菜烩鸡片",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "鸡胸肉 120 克",
+      "大白菜 150 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切薄片，肉逆纹切薄片，生熟刀具分开。",
+      "锅中加油，分散翻炒肉片至表面变色。",
+      "加入蔬菜与水，加盖焖至菜软、肉熟，中途翻匀。",
+      "用食品温度计确认最厚鸡肉中心达到 74℃；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间是估计；不冲洗生鸡肉。",
+    "kind": "main"
+  },
+  {
+    "id": "chicken-broccoli",
+    "name": "西兰花鸡片",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "鸡胸肉 120 克",
+      "西兰花 120 克",
+      "胡萝卜 40 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切薄片，肉逆纹切薄片，生熟刀具分开。",
+      "锅中加油，分散翻炒肉片至表面变色。",
+      "加入蔬菜与水，加盖焖至菜软、肉熟，中途翻匀。",
+      "用食品温度计确认最厚鸡肉中心达到 74℃；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间是估计；不冲洗生鸡肉。",
+    "kind": "main"
+  },
+  {
+    "id": "chicken-celery",
+    "name": "芹菜香菇鸡片",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "鸡胸肉 120 克",
+      "芹菜 100 克",
+      "鲜香菇 50 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切薄片，肉逆纹切薄片，生熟刀具分开。",
+      "锅中加油，分散翻炒肉片至表面变色。",
+      "加入蔬菜与水，加盖焖至菜软、肉熟，中途翻匀。",
+      "用食品温度计确认最厚鸡肉中心达到 74℃；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间是估计；不冲洗生鸡肉。",
+    "kind": "main"
+  },
+  {
+    "id": "pork-radish",
+    "name": "萝卜炖里脊",
+    "minutes": 55,
+    "servings": 1,
+    "ingredients": [
+      "猪里脊肉 120 克",
+      "白萝卜 150 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 250 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，肉切约 2 厘米块，生熟刀具分开。",
+      "锅中加油炒肉至表面变色，加蔬菜和水，煮开转小火。",
+      "盖盖炖至肉与蔬菜软熟，时间随肉块和设备调整，必要时补开水。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "pork-tomato",
+    "name": "番茄烩里脊",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "猪里脊肉 120 克",
+      "番茄 150 克",
+      "洋葱 30 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切薄片，肉逆纹切薄片，生熟刀具分开。",
+      "锅中加油，分散翻炒肉片至表面变色。",
+      "加入蔬菜与水，加盖焖至菜软、肉熟，中途翻匀。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "pork-celery",
+    "name": "芹菜里脊丝",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "猪里脊肉 120 克",
+      "芹菜 120 克",
+      "胡萝卜 40 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切薄片，肉逆纹切薄片，生熟刀具分开。",
+      "锅中加油，分散翻炒肉片至表面变色。",
+      "加入蔬菜与水，加盖焖至菜软、肉熟，中途翻匀。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "pork-eggplant",
+    "name": "茄子蒸里脊",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "猪里脊肉 120 克",
+      "茄子 150 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，肉切薄片，生熟刀具分开。",
+      "将肉、菜、油、盐与水拌匀，平铺耐热浅盘，不堆太厚。",
+      "蒸锅水开后放入，蒸至蔬菜和肉中心全熟。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "beef-shiitake",
+    "name": "香菇炖牛肉",
+    "minutes": 55,
+    "servings": 1,
+    "ingredients": [
+      "瘦牛肉 120 克",
+      "鲜香菇 100 克",
+      "胡萝卜 50 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 250 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，肉切约 2 厘米块，生熟刀具分开。",
+      "锅中加油炒肉至表面变色，加蔬菜和水，煮开转小火。",
+      "盖盖炖至肉与蔬菜软熟，时间随肉块和设备调整，必要时补开水。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "beef-zucchini",
+    "name": "西葫芦牛肉片",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "瘦牛肉 120 克",
+      "西葫芦 150 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切薄片，肉逆纹切薄片，生熟刀具分开。",
+      "锅中加油，分散翻炒肉片至表面变色。",
+      "加入蔬菜与水，加盖焖至菜软、肉熟，中途翻匀。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "beef-potato",
+    "name": "土豆番茄炖牛肉",
+    "minutes": 55,
+    "servings": 1,
+    "ingredients": [
+      "瘦牛肉 120 克",
+      "土豆 80 克",
+      "番茄 120 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 250 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，肉切约 2 厘米块，生熟刀具分开。",
+      "锅中加油炒肉至表面变色，加蔬菜和水，煮开转小火。",
+      "盖盖炖至肉与蔬菜软熟，时间随肉块和设备调整，必要时补开水。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "beef-broccoli",
+    "name": "西兰花牛肉片",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "瘦牛肉 120 克",
+      "西兰花 120 克",
+      "洋葱 30 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切薄片，肉逆纹切薄片，生熟刀具分开。",
+      "锅中加油，分散翻炒肉片至表面变色。",
+      "加入蔬菜与水，加盖焖至菜软、肉熟，中途翻匀。",
+      "用食品温度计确认肉片中心达到 63℃后保持离火静置至少 3 分钟；若无法测温则继续充分做熟；最后加盐，食用时连肉和菜一起吃。"
+    ],
+    "allergens": [],
+    "tip": "时间随厚度和设备变化；用食品温度计确认熟度。",
+    "kind": "main"
+  },
+  {
+    "id": "tofu-napa",
+    "name": "白菜菌菇炖豆腐",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 200 克",
+      "大白菜 120 克",
+      "鲜香菇 50 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 180 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，豆腐切约 2 厘米块。",
+      "锅中加油，先炒蔬菜约 2 分钟，再放豆腐与水。",
+      "煮开后小火炖约 10～12 分钟至菜软、豆腐热透，中途补水防烧干。",
+      "最后加盐拌匀，连食材一起吃。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "钙估算对应石膏豆腐，以实际品牌标签为准。",
+    "kind": "main"
+  },
+  {
+    "id": "tofu-broccoli",
+    "name": "西兰花烩豆腐",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 200 克",
+      "西兰花 120 克",
+      "胡萝卜 40 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 180 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，豆腐切约 2 厘米块。",
+      "锅中加油，先炒蔬菜约 2 分钟，再放豆腐与水。",
+      "煮开后小火炖约 10～12 分钟至菜软、豆腐热透，中途补水防烧干。",
+      "最后加盐拌匀，连食材一起吃。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "钙估算对应石膏豆腐，以实际品牌标签为准。",
+    "kind": "main"
+  },
+  {
+    "id": "lentil-carrot",
+    "name": "胡萝卜红小扁豆炖锅",
+    "minutes": 35,
+    "servings": 1,
+    "ingredients": [
+      "干红小扁豆 60 克",
+      "胡萝卜 100 克",
+      "番茄 100 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 350 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，干红小扁豆淘洗。",
+      "锅中加油，先炒蔬菜约 2 分钟，再放小扁豆与水。",
+      "煮开后小火炖约 25 分钟至小扁豆完全软熟，中途补水防烧干。",
+      "最后加盐拌匀，连食材一起吃。"
+    ],
+    "allergens": [],
+    "tip": "使用干红小扁豆 lentil；豆类引起腹胀时按耐受调整。",
+    "kind": "main"
+  },
+  {
+    "id": "lentil-spinach",
+    "name": "菠菜红小扁豆炖锅",
+    "minutes": 35,
+    "servings": 1,
+    "ingredients": [
+      "干红小扁豆 60 克",
+      "菠菜 100 克",
+      "番茄 100 克",
+      "油 5 克",
+      "加碘食盐 0.5 克",
+      "水 350 毫升"
+    ],
+    "steps": [
+      "蔬菜洗净切小块，干红小扁豆淘洗。",
+      "锅中加油，先炒蔬菜约 2 分钟，再放小扁豆与水。",
+      "煮开后小火炖约 25 分钟至小扁豆完全软熟，中途补水防烧干。",
+      "最后加盐拌匀，连食材一起吃。"
+    ],
+    "allergens": [],
+    "tip": "使用干红小扁豆 lentil；豆类引起腹胀时按耐受调整。",
+    "kind": "main"
+  },
+  {
+    "id": "cod-shiitake",
+    "name": "香菇蒸鳕鱼",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "鳕鱼 120 克",
+      "鲜香菇 80 克",
+      "胡萝卜 40 克",
+      "油 3 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "鱼在冰箱冷藏室解冻，解冻时间另计，检查并去除可见鱼刺。",
+      "蔬菜洗净切薄片，与鱼平铺耐热浅盘，加入油、盐和水。",
+      "水开后蒸约 15～20 分钟，随厚度调整。",
+      "用温度计确认鱼最厚处达到 63℃、蔬菜软熟，吃之前再次检查鱼刺。"
+    ],
+    "allergens": [
+      "鱼"
+    ],
+    "tip": "核对真实鱼种，采用低汞三文鱼或鳕鱼；不使用生鱼。",
+    "kind": "main"
+  },
+  {
+    "id": "cod-zucchini",
+    "name": "西葫芦蒸鳕鱼",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "鳕鱼 120 克",
+      "西葫芦 120 克",
+      "油 3 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "鱼在冰箱冷藏室解冻，解冻时间另计，检查并去除可见鱼刺。",
+      "蔬菜洗净切薄片，与鱼平铺耐热浅盘，加入油、盐和水。",
+      "水开后蒸约 15～20 分钟，随厚度调整。",
+      "用温度计确认鱼最厚处达到 63℃、蔬菜软熟，吃之前再次检查鱼刺。"
+    ],
+    "allergens": [
+      "鱼"
+    ],
+    "tip": "核对真实鱼种，采用低汞三文鱼或鳕鱼；不使用生鱼。",
+    "kind": "main"
+  },
+  {
+    "id": "salmon-broccoli",
+    "name": "西兰花蒸三文鱼",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "三文鱼 120 克",
+      "西兰花 100 克",
+      "胡萝卜 40 克",
+      "油 3 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "鱼在冰箱冷藏室解冻，解冻时间另计，检查并去除可见鱼刺。",
+      "蔬菜洗净切薄片，与鱼平铺耐热浅盘，加入油、盐和水。",
+      "水开后蒸约 15～20 分钟，随厚度调整。",
+      "用温度计确认鱼最厚处达到 63℃、蔬菜软熟，吃之前再次检查鱼刺。"
+    ],
+    "allergens": [
+      "鱼"
+    ],
+    "tip": "核对真实鱼种，采用低汞三文鱼或鳕鱼；不使用生鱼。",
+    "kind": "main"
+  },
+  {
+    "id": "salmon-pumpkin",
+    "name": "南瓜蒸三文鱼",
+    "minutes": 25,
+    "servings": 1,
+    "ingredients": [
+      "三文鱼 120 克",
+      "去皮南瓜 120 克",
+      "油 3 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "鱼在冰箱冷藏室解冻，解冻时间另计，检查并去除可见鱼刺。",
+      "蔬菜洗净切薄片，与鱼平铺耐热浅盘，加入油、盐和水。",
+      "水开后蒸约 15～20 分钟，随厚度调整。",
+      "用温度计确认鱼最厚处达到 63℃、蔬菜软熟，吃之前再次检查鱼刺。"
+    ],
+    "allergens": [
+      "鱼"
+    ],
+    "tip": "核对真实鱼种，采用低汞三文鱼或鳕鱼；不使用生鱼。",
+    "kind": "main"
+  },
+  {
+    "id": "spinach-carrot",
+    "name": "胡萝卜菠菜",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "菠菜 150 克",
+      "胡萝卜 50 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "bok-choy-shiitake",
+    "name": "香菇小白菜",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "小白菜 150 克",
+      "鲜香菇 50 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "broccoli-corn",
+    "name": "玉米西兰花",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "西兰花 150 克",
+      "玉米粒 40 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "lettuce-carrot",
+    "name": "胡萝卜油麦菜",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "油麦菜 150 克",
+      "胡萝卜 50 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "napa-shiitake",
+    "name": "香菇白菜",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "大白菜 150 克",
+      "鲜香菇 50 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "radish-carrot",
+    "name": "双萝卜炖菜",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "白萝卜 150 克",
+      "胡萝卜 50 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "eggplant-tomato",
+    "name": "番茄焖茄子",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "茄子 150 克",
+      "番茄 80 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "zucchini-shiitake",
+    "name": "香菇西葫芦",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "西葫芦 150 克",
+      "鲜香菇 50 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "cabbage-corn",
+    "name": "玉米圆白菜",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "圆白菜 180 克",
+      "玉米粒 40 克",
+      "油 4 克",
+      "加碘食盐 0.4 克",
+      "水 60 毫升"
+    ],
+    "steps": [
+      "蔬菜逐叶或分小朵洗净，切成薄片或短段。",
+      "热锅加油，较硬的菜梗或根菜先入锅，翻炒约 2 分钟。",
+      "加入其余食材与水，盖盖焖至所有食材熟软，必要时补水。",
+      "最后加盐拌匀，不用腌菜或浓酱代替。"
+    ],
+    "allergens": [],
+    "tip": "",
+    "kind": "vegetable"
+  },
+  {
+    "id": "napa-tofu-soup",
+    "name": "白菜豆腐汤",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "大白菜 100 克",
+      "石膏豆腐 80 克",
+      "水 300 毫升",
+      "加碘食盐 0.3 克"
+    ],
+    "steps": [
+      "蔬菜洗净切小块；豆腐如有则切丁。",
+      "水煮开，先放较硬食材，煮至软熟。",
+      "其余食材加入后继续煮至完全熟透，最后加盐。",
+      "汤作为可选配菜，连其中食材一起吃，不用汤代替正餐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "饮水按需要；不承诺汤能催乳。",
+    "kind": "soup"
+  },
+  {
+    "id": "zucchini-shiitake-soup",
+    "name": "西葫芦菌菇汤",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "西葫芦 100 克",
+      "鲜香菇 50 克",
+      "水 300 毫升",
+      "加碘食盐 0.3 克"
+    ],
+    "steps": [
+      "蔬菜洗净切小块；豆腐如有则切丁。",
+      "水煮开，先放较硬食材，煮至软熟。",
+      "其余食材加入后继续煮至完全熟透，最后加盐。",
+      "汤作为可选配菜，连其中食材一起吃，不用汤代替正餐。"
+    ],
+    "allergens": [],
+    "tip": "饮水按需要；不承诺汤能催乳。",
+    "kind": "soup"
+  },
+  {
+    "id": "pumpkin-tofu-soup",
+    "name": "南瓜豆腐汤",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "去皮南瓜 100 克",
+      "石膏豆腐 80 克",
+      "水 300 毫升",
+      "加碘食盐 0.3 克"
+    ],
+    "steps": [
+      "蔬菜洗净切小块；豆腐如有则切丁。",
+      "水煮开，先放较硬食材，煮至软熟。",
+      "其余食材加入后继续煮至完全熟透，最后加盐。",
+      "汤作为可选配菜，连其中食材一起吃，不用汤代替正餐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "饮水按需要；不承诺汤能催乳。",
+    "kind": "soup"
+  },
+  {
+    "id": "tomato-corn-soup",
+    "name": "番茄玉米汤",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "番茄 100 克",
+      "玉米粒 50 克",
+      "水 300 毫升",
+      "加碘食盐 0.3 克"
+    ],
+    "steps": [
+      "蔬菜洗净切小块；豆腐如有则切丁。",
+      "水煮开，先放较硬食材，煮至软熟。",
+      "其余食材加入后继续煮至完全熟透，最后加盐。",
+      "汤作为可选配菜，连其中食材一起吃，不用汤代替正餐。"
+    ],
+    "allergens": [],
+    "tip": "饮水按需要；不承诺汤能催乳。",
+    "kind": "soup"
+  },
+  {
+    "id": "spinach-tofu-soup",
+    "name": "菠菜豆腐汤",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "菠菜 100 克",
+      "石膏豆腐 80 克",
+      "水 300 毫升",
+      "加碘食盐 0.3 克"
+    ],
+    "steps": [
+      "蔬菜洗净切小块；豆腐如有则切丁。",
+      "水煮开，先放较硬食材，煮至软熟。",
+      "其余食材加入后继续煮至完全熟透，最后加盐。",
+      "汤作为可选配菜，连其中食材一起吃，不用汤代替正餐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "饮水按需要；不承诺汤能催乳。",
+    "kind": "soup"
+  },
+  {
+    "id": "carrot-shiitake-soup",
+    "name": "胡萝卜菌菇汤",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "胡萝卜 100 克",
+      "鲜香菇 50 克",
+      "水 300 毫升",
+      "加碘食盐 0.3 克"
+    ],
+    "steps": [
+      "蔬菜洗净切小块；豆腐如有则切丁。",
+      "水煮开，先放较硬食材，煮至软熟。",
+      "其余食材加入后继续煮至完全熟透，最后加盐。",
+      "汤作为可选配菜，连其中食材一起吃，不用汤代替正餐。"
+    ],
+    "allergens": [],
+    "tip": "饮水按需要；不承诺汤能催乳。",
+    "kind": "soup"
+  },
+  {
+    "id": "soy-tomato",
+    "name": "番茄蒸豆腐",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 100 克",
+      "番茄 60 克",
+      "水 40 毫升"
+    ],
+    "steps": [
+      "豆腐与蔬菜洗净切薄片，铺在耐热浅盘中。",
+      "加水，水开后蒸约 12～15 分钟。",
+      "确认蔬菜熟软、豆腐完全热透后拌匀，搭配当日饭菜，不另加盐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "豆腐用量按当天其他豆制品调整；不是必须额外多吃一整盘。",
+    "kind": "soy"
+  },
+  {
+    "id": "soy-shiitake",
+    "name": "香菇蒸豆腐",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 100 克",
+      "鲜香菇 50 克",
+      "水 40 毫升"
+    ],
+    "steps": [
+      "豆腐与蔬菜洗净切薄片，铺在耐热浅盘中。",
+      "加水，水开后蒸约 12～15 分钟。",
+      "确认蔬菜熟软、豆腐完全热透后拌匀，搭配当日饭菜，不另加盐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "豆腐用量按当天其他豆制品调整；不是必须额外多吃一整盘。",
+    "kind": "soy"
+  },
+  {
+    "id": "soy-pumpkin",
+    "name": "南瓜蒸豆腐",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 100 克",
+      "去皮南瓜 60 克",
+      "水 40 毫升"
+    ],
+    "steps": [
+      "豆腐与蔬菜洗净切薄片，铺在耐热浅盘中。",
+      "加水，水开后蒸约 12～15 分钟。",
+      "确认蔬菜熟软、豆腐完全热透后拌匀，搭配当日饭菜，不另加盐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "豆腐用量按当天其他豆制品调整；不是必须额外多吃一整盘。",
+    "kind": "soy"
+  },
+  {
+    "id": "soy-spinach",
+    "name": "菠菜蒸豆腐",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 100 克",
+      "菠菜 60 克",
+      "水 40 毫升"
+    ],
+    "steps": [
+      "豆腐与蔬菜洗净切薄片，铺在耐热浅盘中。",
+      "加水，水开后蒸约 12～15 分钟。",
+      "确认蔬菜熟软、豆腐完全热透后拌匀，搭配当日饭菜，不另加盐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "豆腐用量按当天其他豆制品调整；不是必须额外多吃一整盘。",
+    "kind": "soy"
+  },
+  {
+    "id": "soy-broccoli",
+    "name": "西兰花蒸豆腐",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 100 克",
+      "西兰花 60 克",
+      "水 40 毫升"
+    ],
+    "steps": [
+      "豆腐与蔬菜洗净切薄片，铺在耐热浅盘中。",
+      "加水，水开后蒸约 12～15 分钟。",
+      "确认蔬菜熟软、豆腐完全热透后拌匀，搭配当日饭菜，不另加盐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "豆腐用量按当天其他豆制品调整；不是必须额外多吃一整盘。",
+    "kind": "soy"
+  },
+  {
+    "id": "soy-napa",
+    "name": "白菜蒸豆腐",
+    "minutes": 18,
+    "servings": 1,
+    "ingredients": [
+      "石膏豆腐 100 克",
+      "大白菜 60 克",
+      "水 40 毫升"
+    ],
+    "steps": [
+      "豆腐与蔬菜洗净切薄片，铺在耐热浅盘中。",
+      "加水，水开后蒸约 12～15 分钟。",
+      "确认蔬菜熟软、豆腐完全热透后拌匀，搭配当日饭菜，不另加盐。"
+    ],
+    "allergens": [
+      "大豆"
+    ],
+    "tip": "豆腐用量按当天其他豆制品调整；不是必须额外多吃一整盘。",
+    "kind": "soy"
+  },
+  {
+    "id": "apple-yogurt",
+    "name": "苹果酸奶杯",
+    "minutes": 5,
+    "servings": 1,
+    "ingredients": [
+      "原味无糖全脂酸奶 200 克",
+      "苹果可食部 150 克"
+    ],
+    "steps": [
+      "选择正规冷藏原味无糖酸奶，核对过敏原与保质期。",
+      "水果洗净去皮或去核，称取上列可食重量。",
+      "用干净勺子拌入酸奶，现做现吃，不额外加糖。"
+    ],
+    "allergens": [
+      "乳"
+    ],
+    "tip": "",
+    "kind": "snack"
+  },
+  {
+    "id": "kiwi-yogurt",
+    "name": "猕猴桃酸奶杯",
+    "minutes": 5,
+    "servings": 1,
+    "ingredients": [
+      "原味无糖全脂酸奶 200 克",
+      "猕猴桃可食部 150 克"
+    ],
+    "steps": [
+      "选择正规冷藏原味无糖酸奶，核对过敏原与保质期。",
+      "水果洗净去皮或去核，称取上列可食重量。",
+      "用干净勺子拌入酸奶，现做现吃，不额外加糖。"
+    ],
+    "allergens": [
+      "乳"
+    ],
+    "tip": "",
+    "kind": "snack"
+  },
+  {
+    "id": "banana-yogurt",
+    "name": "香蕉酸奶杯",
+    "minutes": 5,
+    "servings": 1,
+    "ingredients": [
+      "原味无糖全脂酸奶 200 克",
+      "香蕉可食部 150 克"
+    ],
+    "steps": [
+      "选择正规冷藏原味无糖酸奶，核对过敏原与保质期。",
+      "水果洗净去皮或去核，称取上列可食重量。",
+      "用干净勺子拌入酸奶，现做现吃，不额外加糖。"
+    ],
+    "allergens": [
+      "乳"
+    ],
+    "tip": "",
+    "kind": "snack"
+  },
+  {
+    "id": "pear-yogurt",
+    "name": "梨酸奶杯",
+    "minutes": 5,
+    "servings": 1,
+    "ingredients": [
+      "原味无糖全脂酸奶 200 克",
+      "梨可食部 150 克"
+    ],
+    "steps": [
+      "选择正规冷藏原味无糖酸奶，核对过敏原与保质期。",
+      "水果洗净去皮或去核，称取上列可食重量。",
+      "用干净勺子拌入酸奶，现做现吃，不额外加糖。"
+    ],
+    "allergens": [
+      "乳"
+    ],
+    "tip": "",
+    "kind": "snack"
+  },
+  {
+    "id": "orange-yogurt",
+    "name": "橙子酸奶杯",
+    "minutes": 5,
+    "servings": 1,
+    "ingredients": [
+      "原味无糖全脂酸奶 200 克",
+      "橙子可食部 150 克"
+    ],
+    "steps": [
+      "选择正规冷藏原味无糖酸奶，核对过敏原与保质期。",
+      "水果洗净去皮或去核，称取上列可食重量。",
+      "用干净勺子拌入酸奶，现做现吃，不额外加糖。"
+    ],
+    "allergens": [
+      "乳"
+    ],
+    "tip": "",
+    "kind": "snack"
+  },
+  {
+    "id": "warm-apple-walnut",
+    "name": "蒸苹果配核桃",
+    "minutes": 20,
+    "servings": 1,
+    "ingredients": [
+      "苹果可食部 150 克",
+      "无盐核桃仁 10 克"
+    ],
+    "steps": [
+      "苹果洗净去核切片，核桃确认没有霉变，称取上列份量。",
+      "放入耐热小盘，核桃切碎撒在苹果上，盖耐热盖。",
+      "蒸锅水开后蒸约 10～15 分钟至苹果软；不额外加糖。"
+    ],
+    "allergens": [
+      "坚果"
+    ],
+    "tip": "蒸到苹果软熟即可；成人加餐，不需要加糖。",
+    "kind": "snack"
+  },
+  {
+    "id": "banana-walnut",
+    "name": "香蕉核桃小碟",
+    "minutes": 5,
+    "servings": 1,
+    "ingredients": [
+      "香蕉可食部 150 克",
+      "无盐核桃仁 10 克"
+    ],
+    "steps": [
+      "洗手后剥香蕉，称取可食果肉切段。",
+      "无盐核桃切碎，撒在香蕉上，现做现吃。"
+    ],
+    "allergens": [
+      "坚果"
+    ],
+    "tip": "这是成人加餐，整粒坚果不提供给婴幼儿。",
+    "kind": "snack"
+  },
+  {
+    "id": "pear-walnut",
+    "name": "梨与核桃小碟",
+    "minutes": 5,
+    "servings": 1,
+    "ingredients": [
+      "梨可食部 150 克",
+      "无盐核桃仁 10 克"
+    ],
+    "steps": [
+      "梨在流动水下洗净，去核，按喜好去皮切块。",
+      "称取无盐核桃，切碎，与梨一起吃。"
+    ],
+    "allergens": [
+      "坚果"
+    ],
+    "tip": "",
+    "kind": "snack"
+  },
+  {
+    "id": "tomato-egg-breakfast",
+    "name": "番茄炒蛋",
+    "minutes": 15,
+    "servings": 1,
+    "ingredients": [
+      "鸡蛋 1 个",
+      "番茄 80 克",
+      "油 3 克",
+      "加碘食盐 0.2 克",
+      "水 20 毫升"
+    ],
+    "steps": [
+      "番茄洗净切丁，鸡蛋打散。",
+      "热锅加油，先炒番茄出汁，加水煮软。",
+      "倒入蛋液翻炒至全部凝固、没有流动蛋液，最后加盐。"
+    ],
+    "allergens": [
+      "蛋"
+    ],
+    "tip": "不做溏心或半熟蛋。",
+    "kind": "egg"
+  },
+  {
+    "id": "shiitake-egg-breakfast",
+    "name": "香菇蒸蛋",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "鸡蛋 1 个",
+      "鲜香菇 40 克",
+      "温水 80 毫升",
+      "加碘食盐 0.2 克"
+    ],
+    "steps": [
+      "蔬菜洗净切碎；香菇先煮熟或菠菜焯熟沥水。",
+      "鸡蛋与温水和盐搅匀，加入熟蔬菜，倒入耐热浅碗。",
+      "盖耐热小盘，水开后蒸约 12～15 分钟。",
+      "确认中心蛋液完全凝固，未熟则继续蒸至全熟。"
+    ],
+    "allergens": [
+      "蛋"
+    ],
+    "tip": "时间随厚度变化，鸡蛋完全做熟再食用。",
+    "kind": "egg"
+  },
+  {
+    "id": "spinach-egg-breakfast",
+    "name": "菠菜蒸蛋",
+    "minutes": 22,
+    "servings": 1,
+    "ingredients": [
+      "鸡蛋 1 个",
+      "菠菜 50 克",
+      "温水 80 毫升",
+      "加碘食盐 0.2 克"
+    ],
+    "steps": [
+      "蔬菜洗净切碎；香菇先煮熟或菠菜焯熟沥水。",
+      "鸡蛋与温水和盐搅匀，加入熟蔬菜，倒入耐热浅碗。",
+      "盖耐热小盘，水开后蒸约 12～15 分钟。",
+      "确认中心蛋液完全凝固，未熟则继续蒸至全熟。"
+    ],
+    "allergens": [
+      "蛋"
+    ],
+    "tip": "时间随厚度变化，鸡蛋完全做熟再食用。",
+    "kind": "egg"
+  }
+].map(recipe => [recipe.id, recipe])));
   const rows = [
-    ['millet','chicken-carrot','bok-choy','tofu-tomato','spinach','wintermelon-soup'],
-    ['oats','pork-yam','zucchini','salmon','broccoli','corn-soup'],
-    ['rice-porridge','tomato-beef','cabbage','mushroom-chicken','lettuce','radish-soup'],
-    ['bun','tofu-mushroom','spinach','pork-cabbage','bok-choy','tomato-tofu-soup'],
-    ['corn-porridge','potato-chicken','broccoli','cod','zucchini','wintermelon-soup'],
-    ['sweet-potato','radish-beef','lettuce','tofu-egg','cabbage','corn-soup'],
-    ['bread','pork-mushroom','bok-choy','chicken-zucchini','pumpkin','egg-soup'],
-    ['oats','celery-beef','broccoli','tofu-mushroom','lettuce','wintermelon-soup'],
-    ['bun','chicken-zucchini','spinach','cod','cabbage','corn-soup'],
-    ['millet','pork-broccoli','eggplant','lentil-pumpkin','bok-choy','radish-soup'],
-    ['bread','mushroom-chicken','zucchini','pork-yam','lettuce','tomato-tofu-soup'],
-    ['rice-porridge','beef-pumpkin','bok-choy','salmon','spinach','wintermelon-soup'],
-    ['corn-porridge','tofu-tomato','broccoli','potato-chicken','cabbage','corn-soup'],
-    ['sweet-potato','pork-cabbage','lettuce','tomato-beef','zucchini','radish-soup'],
-    ['bun','radish-beef','spinach','chicken-carrot','cabbage','tomato-tofu-soup'],
-    ['millet','tofu-mushroom','bok-choy','salmon','eggplant','wintermelon-soup'],
-    ['oats','pork-yam','green-beans','celery-beef','broccoli','corn-soup'],
-    ['sweet-potato','potato-chicken','lettuce','lentil-pumpkin','spinach','radish-soup'],
-    ['bread','pork-mushroom','cabbage','cod','bok-choy','tomato-tofu-soup'],
-    ['rice-porridge','tomato-beef','zucchini','tofu-egg','broccoli','wintermelon-soup'],
-    ['corn-porridge','chicken-zucchini','bok-choy','pork-broccoli','eggplant','corn-soup'],
-    ['bread','beef-pumpkin','lettuce','tofu-tomato','cabbage','radish-soup'],
-    ['oats','mushroom-chicken','green-beans','cod','spinach','tomato-tofu-soup'],
-    ['bun','pork-cabbage','broccoli','celery-beef','zucchini','wintermelon-soup'],
-    ['millet','lentil-pumpkin','bok-choy','chicken-carrot','eggplant','corn-soup'],
-    ['corn-porridge','pork-yam','spinach','salmon','cabbage','radish-soup'],
-    ['sweet-potato','radish-beef','zucchini','tofu-mushroom','lettuce','tomato-tofu-soup'],
-    ['rice-porridge','potato-chicken','broccoli','pork-mushroom','green-beans','wintermelon-soup'],
-    ['oats','celery-beef','bok-choy','tofu-egg','eggplant','corn-soup'],
-    ['sweet-potato','chicken-zucchini','cabbage','salmon','lettuce','radish-soup'],
-    ['bread','pork-broccoli','spinach','lentil-pumpkin','zucchini','tomato-tofu-soup'],
-    ['bun','tofu-tomato','green-beans','mushroom-chicken','broccoli','wintermelon-soup'],
-    ['millet','tomato-beef','lettuce','cod','bok-choy','corn-soup'],
-    ['corn-porridge','pork-mushroom','eggplant','chicken-carrot','spinach','radish-soup'],
-    ['rice-porridge','beef-pumpkin','cabbage','tofu-mushroom','green-beans','tomato-tofu-soup'],
-    ['sweet-potato','pork-yam','bok-choy','potato-chicken','broccoli','wintermelon-soup'],
-    ['bread','lentil-pumpkin','spinach','cod','cabbage','corn-soup'],
-    ['oats','radish-beef','green-beans','chicken-zucchini','lettuce','radish-soup'],
-    ['corn-porridge','mushroom-chicken','eggplant','tofu-tomato','bok-choy','tomato-tofu-soup'],
-    ['bun','pork-cabbage','broccoli','salmon','zucchini','wintermelon-soup'],
-    ['rice-porridge','celery-beef','lettuce','pork-broccoli','spinach','corn-soup'],
-    ['millet','chicken-carrot','cabbage','tofu-mushroom','green-beans','radish-soup']
-  ];
-  const staples = ['rice', 'millet-rice', 'pumpkin-rice', 'mixed-rice', 'noodles'];
-  const fruits = ['apple', 'pear', 'orange', 'kiwi', 'banana'];
-  const notes = [
-    '这一周选了较软的家常做法；只有已获准恢复普通饮食时才开始使用。',
-    '主食、蛋白质、蔬菜都保留；不喜欢的食材可换成自己能耐受的同类食物。',
-    '荤菜、豆类和蔬菜交替搭配，汤里的食材也一起吃。',
-    '提前处理当天食材，可以先开电饭煲，再准备炖菜和蔬菜。',
-    '按食欲和实际需要调整份量；这份菜单没有计算个人能量和营养目标。',
-    '延续日常多样饮食，42 天结束后也可以继续沿用喜欢的家常菜。'
-  ];
-  const days = rows.map((row, index) => {
-    const [breakfast, lunch, lunchVeg, dinner, dinnerVeg, soup] = row;
-    const breakfastIds = [breakfast, index % 3 === 0 ? 'egg-custard' : 'boiled-egg'];
-    if (breakfast !== 'oats') breakfastIds.push('milk');
-    return { day: index + 1, week: Math.floor(index / 7) + 1, note: notes[Math.floor(index / 7)], meals: [
-      { label: '早餐', time: '07:30', recipeIds: breakfastIds },
-      { label: '上午加餐', time: '10:00', recipeIds: [fruits[index % fruits.length]] },
-      { label: '午餐', time: '12:00', recipeIds: [staples[Math.floor(index / 7) === 0 ? 0 : index % staples.length], lunch, lunchVeg] },
-      { label: '下午加餐', time: '15:00', recipeIds: ['yogurt', fruits[(index + 2) % fruits.length], 'nuts'] },
-      { label: '晚餐', time: '18:00', recipeIds: [staples[Math.floor(index / 7) === 0 ? 0 : (index + 1) % staples.length], dinner, dinnerVeg, soup] }
-    ] };
-  });
-  window.MEAL_PLAN = { version: 1, recipes, days, sources: [
-    { title: 'CDC：哺乳期多样饮食与个人营养需求', url: 'https://www.cdc.gov/breastfeeding-special-circumstances/hcp/diet-micronutrients/maternal-diet.html' },
-    { title: 'FDA：孕期与哺乳期鱼类选择', url: 'https://www.fda.gov/food/consumers/advice-about-eating-fish' },
-    { title: 'FoodSafety.gov：安全烹饪中心温度', url: 'https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures' }
-  ] };
+  {
+    "day": 1,
+    "week": 1,
+    "breakfast": [
+      "millet",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "apple"
+    ],
+    "lunch": [
+      "mixed-rice",
+      "chicken-carrot",
+      "bok-choy"
+    ],
+    "afternoon": [
+      "kiwi-yogurt",
+      "nuts"
+    ],
+    "dinner": [
+      "yam-rice",
+      "tofu-mushroom",
+      "cabbage",
+      "wintermelon-soup"
+    ]
+  },
+  {
+    "day": 2,
+    "week": 1,
+    "breakfast": [
+      "savory-oats",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "banana-yogurt"
+    ],
+    "lunch": [
+      "oat-rice",
+      "pork-mushroom",
+      "zucchini"
+    ],
+    "afternoon": [
+      "orange",
+      "nuts"
+    ],
+    "dinner": [
+      "corn-rice",
+      "salmon",
+      "spinach",
+      "radish-soup"
+    ]
+  },
+  {
+    "day": 3,
+    "week": 1,
+    "breakfast": [
+      "pumpkin-wheat-cake",
+      "tomato-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "pear-walnut"
+    ],
+    "lunch": [
+      "millet-rice",
+      "tomato-beef",
+      "broccoli"
+    ],
+    "afternoon": [
+      "apple-yogurt"
+    ],
+    "dinner": [
+      "wheat-noodles",
+      "potato-chicken",
+      "green-beans",
+      "tomato-tofu-soup"
+    ]
+  },
+  {
+    "day": 4,
+    "week": 1,
+    "breakfast": [
+      "corn-milk-oats",
+      "shiitake-egg-breakfast"
+    ],
+    "morning": [
+      "orange"
+    ],
+    "lunch": [
+      "wheat-noodles",
+      "tofu-tomato",
+      "eggplant"
+    ],
+    "afternoon": [
+      "warm-apple-walnut",
+      "yogurt"
+    ],
+    "dinner": [
+      "mixed-rice",
+      "pork-broccoli",
+      "lettuce",
+      "corn-soup"
+    ]
+  },
+  {
+    "day": 5,
+    "week": 1,
+    "breakfast": [
+      "yam-millet",
+      "spinach-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "kiwi-yogurt"
+    ],
+    "lunch": [
+      "corn-rice",
+      "mushroom-chicken",
+      "spinach-carrot"
+    ],
+    "afternoon": [
+      "banana",
+      "nuts"
+    ],
+    "dinner": [
+      "oat-rice",
+      "cod",
+      "napa-shiitake",
+      "egg-soup"
+    ]
+  },
+  {
+    "day": 6,
+    "week": 1,
+    "breakfast": [
+      "bread",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "apple",
+      "nuts"
+    ],
+    "lunch": [
+      "yam-rice",
+      "radish-beef",
+      "radish-carrot"
+    ],
+    "afternoon": [
+      "pear-yogurt"
+    ],
+    "dinner": [
+      "millet-rice",
+      "tofu-egg",
+      "bok-choy-shiitake",
+      "napa-tofu-soup"
+    ]
+  },
+  {
+    "day": 7,
+    "week": 1,
+    "breakfast": [
+      "lentil-rice-porridge",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "orange-yogurt"
+    ],
+    "lunch": [
+      "bun",
+      "cod-shiitake",
+      "broccoli-corn",
+      "sweet-potato"
+    ],
+    "afternoon": [
+      "banana-walnut"
+    ],
+    "dinner": [
+      "pumpkin-rice",
+      "pork-yam",
+      "eggplant-tomato",
+      "zucchini-shiitake-soup"
+    ]
+  },
+  {
+    "day": 8,
+    "week": 2,
+    "breakfast": [
+      "sweet-potato-oats",
+      "tomato-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "pear-walnut"
+    ],
+    "lunch": [
+      "millet-rice",
+      "chicken-zucchini",
+      "pumpkin"
+    ],
+    "afternoon": [
+      "apple-yogurt"
+    ],
+    "dinner": [
+      "corn-rice",
+      "lentil-pumpkin",
+      "bok-choy",
+      "spinach-tofu-soup"
+    ]
+  },
+  {
+    "day": 9,
+    "week": 2,
+    "breakfast": [
+      "bun",
+      "shiitake-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "orange"
+    ],
+    "lunch": [
+      "wheat-noodles",
+      "pork-cabbage",
+      "spinach"
+    ],
+    "afternoon": [
+      "warm-apple-walnut",
+      "yogurt"
+    ],
+    "dinner": [
+      "millet-rice",
+      "cod-zucchini",
+      "cabbage",
+      "carrot-shiitake-soup"
+    ]
+  },
+  {
+    "day": 10,
+    "week": 2,
+    "breakfast": [
+      "rice-porridge",
+      "spinach-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "kiwi-yogurt"
+    ],
+    "lunch": [
+      "corn-rice",
+      "celery-beef",
+      "zucchini"
+    ],
+    "afternoon": [
+      "banana",
+      "nuts"
+    ],
+    "dinner": [
+      "mixed-rice",
+      "chicken-pumpkin",
+      "broccoli",
+      "wintermelon-soup"
+    ]
+  },
+  {
+    "day": 11,
+    "week": 2,
+    "breakfast": [
+      "corn-wheat-cake",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "apple",
+      "nuts"
+    ],
+    "lunch": [
+      "yam-rice",
+      "tofu-napa",
+      "lettuce"
+    ],
+    "afternoon": [
+      "pear-yogurt"
+    ],
+    "dinner": [
+      "oat-rice",
+      "pork-radish",
+      "green-beans",
+      "radish-soup"
+    ]
+  },
+  {
+    "day": 12,
+    "week": 2,
+    "breakfast": [
+      "sweet-potato",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "orange-yogurt"
+    ],
+    "lunch": [
+      "bun",
+      "chicken-napa",
+      "eggplant",
+      "sweet-potato"
+    ],
+    "afternoon": [
+      "banana-walnut"
+    ],
+    "dinner": [
+      "millet-rice",
+      "salmon-broccoli",
+      "spinach-carrot",
+      "tomato-tofu-soup"
+    ]
+  },
+  {
+    "day": 13,
+    "week": 2,
+    "breakfast": [
+      "corn-porridge",
+      "tomato-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "pear-yogurt",
+      "nuts"
+    ],
+    "lunch": [
+      "mixed-rice",
+      "beef-pumpkin",
+      "bok-choy-shiitake"
+    ],
+    "afternoon": [
+      "kiwi"
+    ],
+    "dinner": [
+      "millet-rice",
+      "tofu-broccoli",
+      "napa-shiitake",
+      "corn-soup"
+    ]
+  },
+  {
+    "day": 14,
+    "week": 2,
+    "breakfast": [
+      "millet",
+      "shiitake-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "apple"
+    ],
+    "lunch": [
+      "oat-rice",
+      "salmon-pumpkin",
+      "radish-carrot"
+    ],
+    "afternoon": [
+      "kiwi-yogurt",
+      "nuts"
+    ],
+    "dinner": [
+      "yam-rice",
+      "pork-tomato",
+      "broccoli-corn",
+      "egg-soup"
+    ]
+  },
+  {
+    "day": 15,
+    "week": 3,
+    "breakfast": [
+      "corn-milk-oats",
+      "spinach-egg-breakfast"
+    ],
+    "morning": [
+      "kiwi-yogurt"
+    ],
+    "lunch": [
+      "corn-rice",
+      "chicken-broccoli",
+      "bok-choy"
+    ],
+    "afternoon": [
+      "banana",
+      "nuts"
+    ],
+    "dinner": [
+      "noodles",
+      "lentil-carrot",
+      "cabbage-corn",
+      "pumpkin-tofu-soup"
+    ]
+  },
+  {
+    "day": 16,
+    "week": 3,
+    "breakfast": [
+      "yam-millet",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "apple",
+      "nuts"
+    ],
+    "lunch": [
+      "yam-rice",
+      "pork-celery",
+      "pumpkin"
+    ],
+    "afternoon": [
+      "pear-yogurt"
+    ],
+    "dinner": [
+      "mixed-rice",
+      "salmon",
+      "spinach",
+      "tomato-corn-soup"
+    ]
+  },
+  {
+    "day": 17,
+    "week": 3,
+    "breakfast": [
+      "bread",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "orange-yogurt"
+    ],
+    "lunch": [
+      "bun",
+      "beef-shiitake",
+      "broccoli",
+      "sweet-potato"
+    ],
+    "afternoon": [
+      "banana-walnut"
+    ],
+    "dinner": [
+      "oat-rice",
+      "chicken-celery",
+      "cabbage",
+      "spinach-tofu-soup"
+    ]
+  },
+  {
+    "day": 18,
+    "week": 3,
+    "breakfast": [
+      "lentil-rice-porridge",
+      "tomato-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "pear-yogurt",
+      "nuts"
+    ],
+    "lunch": [
+      "mixed-rice",
+      "lentil-spinach",
+      "zucchini"
+    ],
+    "afternoon": [
+      "kiwi"
+    ],
+    "dinner": [
+      "millet-rice",
+      "pork-eggplant",
+      "lettuce",
+      "carrot-shiitake-soup"
+    ]
+  },
+  {
+    "day": 19,
+    "week": 3,
+    "breakfast": [
+      "oats",
+      "shiitake-egg-breakfast"
+    ],
+    "morning": [
+      "apple"
+    ],
+    "lunch": [
+      "oat-rice",
+      "chicken-carrot",
+      "spinach-carrot"
+    ],
+    "afternoon": [
+      "kiwi-yogurt",
+      "nuts"
+    ],
+    "dinner": [
+      "pumpkin-rice",
+      "cod",
+      "green-beans",
+      "wintermelon-soup"
+    ]
+  },
+  {
+    "day": 20,
+    "week": 3,
+    "breakfast": [
+      "vegetable-noodle-breakfast",
+      "spinach-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "banana-yogurt"
+    ],
+    "lunch": [
+      "millet-rice",
+      "beef-zucchini",
+      "eggplant"
+    ],
+    "afternoon": [
+      "orange",
+      "nuts"
+    ],
+    "dinner": [
+      "yam-rice",
+      "tofu-mushroom",
+      "bok-choy-shiitake",
+      "radish-soup"
+    ]
+  },
+  {
+    "day": 21,
+    "week": 3,
+    "breakfast": [
+      "sweet-potato-oats",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "pear-walnut"
+    ],
+    "lunch": [
+      "wheat-noodles",
+      "cod-shiitake",
+      "broccoli-corn"
+    ],
+    "afternoon": [
+      "apple-yogurt"
+    ],
+    "dinner": [
+      "corn-rice",
+      "pork-mushroom",
+      "napa-shiitake",
+      "tomato-tofu-soup"
+    ]
+  },
+  {
+    "day": 22,
+    "week": 4,
+    "breakfast": [
+      "corn-wheat-cake",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "orange-yogurt"
+    ],
+    "lunch": [
+      "bun",
+      "potato-chicken",
+      "zucchini-shiitake",
+      "sweet-potato"
+    ],
+    "afternoon": [
+      "banana-walnut"
+    ],
+    "dinner": [
+      "mixed-rice",
+      "tofu-tomato",
+      "bok-choy",
+      "napa-tofu-soup"
+    ]
+  },
+  {
+    "day": 23,
+    "week": 4,
+    "breakfast": [
+      "sweet-potato",
+      "tomato-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "pear-yogurt",
+      "nuts"
+    ],
+    "lunch": [
+      "mixed-rice",
+      "pork-broccoli",
+      "spinach"
+    ],
+    "afternoon": [
+      "kiwi"
+    ],
+    "dinner": [
+      "oat-rice",
+      "cod-zucchini",
+      "cabbage-corn",
+      "zucchini-shiitake-soup"
+    ]
+  },
+  {
+    "day": 24,
+    "week": 4,
+    "breakfast": [
+      "corn-porridge",
+      "shiitake-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "apple"
+    ],
+    "lunch": [
+      "oat-rice",
+      "beef-potato",
+      "pumpkin"
+    ],
+    "afternoon": [
+      "kiwi-yogurt",
+      "nuts"
+    ],
+    "dinner": [
+      "millet-rice",
+      "mushroom-chicken",
+      "broccoli",
+      "pumpkin-tofu-soup"
+    ]
+  },
+  {
+    "day": 25,
+    "week": 4,
+    "breakfast": [
+      "millet",
+      "spinach-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "banana-yogurt"
+    ],
+    "lunch": [
+      "millet-rice",
+      "tofu-egg",
+      "lettuce"
+    ],
+    "afternoon": [
+      "orange",
+      "nuts"
+    ],
+    "dinner": [
+      "millet-rice",
+      "pork-yam",
+      "cabbage",
+      "tomato-corn-soup"
+    ]
+  },
+  {
+    "day": 26,
+    "week": 4,
+    "breakfast": [
+      "savory-oats",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "pear-walnut"
+    ],
+    "lunch": [
+      "wheat-noodles",
+      "chicken-zucchini",
+      "zucchini"
+    ],
+    "afternoon": [
+      "apple-yogurt"
+    ],
+    "dinner": [
+      "yam-rice",
+      "salmon-broccoli",
+      "spinach-carrot",
+      "spinach-tofu-soup"
+    ]
+  },
+  {
+    "day": 27,
+    "week": 4,
+    "breakfast": [
+      "pumpkin-wheat-cake",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "orange"
+    ],
+    "lunch": [
+      "corn-rice",
+      "beef-broccoli",
+      "bok-choy-shiitake"
+    ],
+    "afternoon": [
+      "warm-apple-walnut",
+      "yogurt"
+    ],
+    "dinner": [
+      "corn-rice",
+      "lentil-pumpkin",
+      "green-beans",
+      "carrot-shiitake-soup"
+    ]
+  },
+  {
+    "day": 28,
+    "week": 4,
+    "breakfast": [
+      "corn-milk-oats",
+      "tomato-egg-breakfast"
+    ],
+    "morning": [
+      "kiwi-yogurt"
+    ],
+    "lunch": [
+      "yam-rice",
+      "salmon-pumpkin",
+      "eggplant"
+    ],
+    "afternoon": [
+      "banana",
+      "nuts"
+    ],
+    "dinner": [
+      "wheat-noodles",
+      "pork-cabbage",
+      "broccoli-corn",
+      "wintermelon-soup"
+    ]
+  },
+  {
+    "day": 29,
+    "week": 5,
+    "breakfast": [
+      "lentil-rice-porridge",
+      "shiitake-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "apple"
+    ],
+    "lunch": [
+      "oat-rice",
+      "chicken-pumpkin",
+      "bok-choy"
+    ],
+    "afternoon": [
+      "kiwi-yogurt",
+      "nuts"
+    ],
+    "dinner": [
+      "oat-rice",
+      "tofu-napa",
+      "eggplant-tomato",
+      "corn-soup"
+    ]
+  },
+  {
+    "day": 30,
+    "week": 5,
+    "breakfast": [
+      "oats",
+      "spinach-egg-breakfast"
+    ],
+    "morning": [
+      "banana-yogurt"
+    ],
+    "lunch": [
+      "millet-rice",
+      "pork-radish",
+      "zucchini-shiitake"
+    ],
+    "afternoon": [
+      "orange",
+      "nuts"
+    ],
+    "dinner": [
+      "millet-rice",
+      "salmon",
+      "spinach",
+      "egg-soup"
+    ]
+  },
+  {
+    "day": 31,
+    "week": 5,
+    "breakfast": [
+      "vegetable-noodle-breakfast",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "pear-walnut"
+    ],
+    "lunch": [
+      "wheat-noodles",
+      "tomato-beef",
+      "broccoli"
+    ],
+    "afternoon": [
+      "apple-yogurt"
+    ],
+    "dinner": [
+      "pumpkin-rice",
+      "chicken-napa",
+      "cabbage-corn",
+      "napa-tofu-soup"
+    ]
+  },
+  {
+    "day": 32,
+    "week": 5,
+    "breakfast": [
+      "sweet-potato-oats",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "orange"
+    ],
+    "lunch": [
+      "corn-rice",
+      "tofu-broccoli",
+      "pumpkin"
+    ],
+    "afternoon": [
+      "warm-apple-walnut",
+      "yogurt"
+    ],
+    "dinner": [
+      "yam-rice",
+      "pork-tomato",
+      "lettuce",
+      "zucchini-shiitake-soup"
+    ]
+  },
+  {
+    "day": 33,
+    "week": 5,
+    "breakfast": [
+      "bun",
+      "tomato-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "kiwi-yogurt"
+    ],
+    "lunch": [
+      "yam-rice",
+      "chicken-broccoli",
+      "spinach-carrot"
+    ],
+    "afternoon": [
+      "banana",
+      "nuts"
+    ],
+    "dinner": [
+      "corn-rice",
+      "cod",
+      "cabbage",
+      "pumpkin-tofu-soup"
+    ]
+  },
+  {
+    "day": 34,
+    "week": 5,
+    "breakfast": [
+      "rice-porridge",
+      "shiitake-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "apple",
+      "nuts"
+    ],
+    "lunch": [
+      "bun",
+      "radish-beef",
+      "zucchini",
+      "sweet-potato"
+    ],
+    "afternoon": [
+      "pear-yogurt"
+    ],
+    "dinner": [
+      "millet-rice",
+      "lentil-carrot",
+      "bok-choy-shiitake",
+      "tomato-corn-soup"
+    ]
+  },
+  {
+    "day": 35,
+    "week": 5,
+    "breakfast": [
+      "corn-wheat-cake",
+      "spinach-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "orange-yogurt"
+    ],
+    "lunch": [
+      "mixed-rice",
+      "cod-shiitake",
+      "broccoli-corn"
+    ],
+    "afternoon": [
+      "banana-walnut"
+    ],
+    "dinner": [
+      "mixed-rice",
+      "pork-celery",
+      "green-beans",
+      "spinach-tofu-soup"
+    ]
+  },
+  {
+    "day": 36,
+    "week": 6,
+    "breakfast": [
+      "millet",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "pear-walnut"
+    ],
+    "lunch": [
+      "noodles",
+      "chicken-celery",
+      "radish-carrot"
+    ],
+    "afternoon": [
+      "apple-yogurt"
+    ],
+    "dinner": [
+      "millet-rice",
+      "lentil-spinach",
+      "bok-choy",
+      "radish-soup"
+    ]
+  },
+  {
+    "day": 37,
+    "week": 6,
+    "breakfast": [
+      "savory-oats",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "orange"
+    ],
+    "lunch": [
+      "corn-rice",
+      "pork-eggplant",
+      "spinach"
+    ],
+    "afternoon": [
+      "warm-apple-walnut",
+      "yogurt"
+    ],
+    "dinner": [
+      "pumpkin-rice",
+      "cod-zucchini",
+      "eggplant-tomato",
+      "tomato-tofu-soup"
+    ]
+  },
+  {
+    "day": 38,
+    "week": 6,
+    "breakfast": [
+      "pumpkin-wheat-cake",
+      "tomato-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "kiwi-yogurt"
+    ],
+    "lunch": [
+      "yam-rice",
+      "celery-beef",
+      "zucchini-shiitake"
+    ],
+    "afternoon": [
+      "banana",
+      "nuts"
+    ],
+    "dinner": [
+      "yam-rice",
+      "chicken-carrot",
+      "broccoli",
+      "corn-soup"
+    ]
+  },
+  {
+    "day": 39,
+    "week": 6,
+    "breakfast": [
+      "corn-milk-oats",
+      "shiitake-egg-breakfast"
+    ],
+    "morning": [
+      "apple",
+      "nuts"
+    ],
+    "lunch": [
+      "bun",
+      "tofu-mushroom",
+      "lettuce",
+      "sweet-potato"
+    ],
+    "afternoon": [
+      "pear-yogurt"
+    ],
+    "dinner": [
+      "corn-rice",
+      "pork-mushroom",
+      "cabbage-corn",
+      "egg-soup"
+    ]
+  },
+  {
+    "day": 40,
+    "week": 6,
+    "breakfast": [
+      "yam-millet",
+      "spinach-egg-breakfast",
+      "milk"
+    ],
+    "morning": [
+      "orange-yogurt"
+    ],
+    "lunch": [
+      "mixed-rice",
+      "potato-chicken",
+      "pumpkin"
+    ],
+    "afternoon": [
+      "banana-walnut"
+    ],
+    "dinner": [
+      "wheat-noodles",
+      "salmon-broccoli",
+      "spinach-carrot",
+      "napa-tofu-soup"
+    ]
+  },
+  {
+    "day": 41,
+    "week": 6,
+    "breakfast": [
+      "bread",
+      "boiled-egg",
+      "milk"
+    ],
+    "morning": [
+      "pear-yogurt",
+      "nuts"
+    ],
+    "lunch": [
+      "oat-rice",
+      "beef-pumpkin",
+      "bok-choy-shiitake"
+    ],
+    "afternoon": [
+      "kiwi"
+    ],
+    "dinner": [
+      "mixed-rice",
+      "tofu-tomato",
+      "cabbage",
+      "zucchini-shiitake-soup"
+    ]
+  },
+  {
+    "day": 42,
+    "week": 6,
+    "breakfast": [
+      "lentil-rice-porridge",
+      "egg-custard",
+      "milk"
+    ],
+    "morning": [
+      "apple"
+    ],
+    "lunch": [
+      "millet-rice",
+      "salmon-pumpkin",
+      "zucchini"
+    ],
+    "afternoon": [
+      "kiwi-yogurt",
+      "nuts"
+    ],
+    "dinner": [
+      "oat-rice",
+      "pork-broccoli",
+      "broccoli-corn",
+      "pumpkin-tofu-soup"
+    ]
+  }
+];
+  const notes = ["已获准恢复普通饮食后再使用；这周优先安排容易做熟的家常饭菜，粗粮和豆类按耐受调整。","把主食、奶蛋、豆类、鱼肉和蔬果搭配起来；不强制催乳汤或固定禁忌。","食材与烹调方式继续轮换；深色蔬菜与其他蔬菜搭配，不需要追求昂贵食材。","可按当天做法先煮饭、再做主菜、临吃前做蔬菜；生熟用具分开。","按食欲、活动、实际泌乳量和恢复情况调整；页面份量是参考，不是个人处方。","延续多样、适量的日常饮食，42 天是查阅日程，不代表医学恢复分期。"];
+  const slots = [['早餐','07:30','breakfast'],['上午加餐','10:00','morning'],['午餐','12:00','lunch'],['下午加餐','15:00','afternoon'],['晚餐','18:00','dinner']];
+  const days = rows.map(row => ({day:row.day,week:row.week,note:notes[row.week-1],meals:slots.map(([label,time,key])=>({label,time,recipeIds:row[key]}))}));
+  window.MEAL_PLAN = {version:2,updatedAt:'2026-10-07',recipes,days,sources:[
+    {title:'中国营养学会：孕妇与乳母膳食指南（2022）核心信息',url:'https://dg.en.cnsoc.org/article/14/RIhZl7UuQQuHyzCwoMRptg.html'},
+    {title:'国家卫健委：健康饮食、合理膳食（2025）',url:'https://www.nhc.gov.cn/sps/c100088/202505/6b7a718abd4848e8a3e98fc561a8858b.shtml'},
+    {title:'CDC：哺乳期饮食与个人营养需求',url:'https://www.cdc.gov/breastfeeding-special-circumstances/hcp/diet-micronutrients/maternal-diet.html'},
+    {title:'FDA：孕期与哺乳期鱼类选择',url:'https://www.fda.gov/food/consumers/advice-about-eating-fish'},
+    {title:'FoodSafety.gov：安全烹饪中心温度',url:'https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures'}
+  ]};
 })();

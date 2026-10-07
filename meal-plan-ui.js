@@ -78,7 +78,9 @@
       const shown = ['kcal','calcium','sodium'].includes(key) ? Math.round(value/10)*10 : Math.round(value*10)/10;
       item.append(element('dt','',names[key]),element('dd','',`约 ${shown} ${units[key]}`)); return item;
     }));
-    $('nutrition-difference').textContent = profile === 'lactating' ? `今天的哺乳版比同日不哺乳版多约 ${Math.round(current.extraKcal)} 千卡：午、晚餐各增加 30 克干谷物，另加 150 毫升奶和 5 克核桃。` : '不哺乳版保留均衡三餐和加餐，不计入哺乳所需的额外能量；实际食量仍按体型、活动、食欲和恢复情况调整。';
+    $('nutrition-difference').textContent = profile === 'lactating' ? `今天的哺乳版比同日不哺乳版多约 ${Math.round(current.extraKcal)} 千卡：主食合计增加 60 克干大米，另加 150 毫升奶和 5 克核桃。` : '不哺乳版保留均衡三餐和加餐，不计入哺乳所需的额外能量；实际食量按体型、活动、食欲和恢复情况调整。';
+    const week = window.MEAL_NUTRITION.weekSummary(current.week, profile);
+    $('meal-variety').textContent = `今日约 ${current.quality.foodCount} 种主要食材 · 蔬菜约 ${Math.round(current.quality.vegetables)} 克（深色约 ${Math.round(current.quality.darkVegetables)} 克） · 本周约 ${week.foodCount} 种食材、${week.fishMeals} 餐低汞鱼，共约 ${Math.round(week.fishGrams)} 克。`;
     rendered = day;
   }
   $('previous-day').onclick = () => { if (day > 1) choose(day - 1); };

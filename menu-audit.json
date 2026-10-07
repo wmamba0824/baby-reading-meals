@@ -1,0 +1,407 @@
+{
+  "version": 2,
+  "verifiedAt": "2026-10-07",
+  "days": 42,
+  "profiles": 2,
+  "mainRecipes": 38,
+  "breakfastStarches": 15,
+  "lunchStarches": 8,
+  "dinnerStarches": 8,
+  "vegetableRecipes": 17,
+  "soups": 11,
+  "ranges": {
+    "nonlactating": {
+      "kcal": [
+        1731.1,
+        2155.1
+      ],
+      "protein": [
+        85,
+        107.2
+      ],
+      "fat": [
+        52.2,
+        70.9
+      ],
+      "carbs": [
+        233.4,
+        325.2
+      ],
+      "fiber": [
+        26,
+        41.9
+      ],
+      "calcium": [
+        1032.4,
+        1767.7
+      ],
+      "iron": [
+        16.1,
+        24.7
+      ],
+      "sodium": [
+        1180.1,
+        1949.3
+      ]
+    },
+    "lactating": {
+      "kcal": [
+        2074.3,
+        2498.3
+      ],
+      "protein": [
+        94.8,
+        117
+      ],
+      "fat": [
+        60.8,
+        79.4
+      ],
+      "carbs": [
+        289.2,
+        381
+      ],
+      "fiber": [
+        27.1,
+        43
+      ],
+      "calcium": [
+        1223.6,
+        1958.9
+      ],
+      "iron": [
+        16.7,
+        25.4
+      ],
+      "sodium": [
+        1247.7,
+        2016.9
+      ]
+    }
+  },
+  "qualityRanges": {
+    "foodCount": [
+      15,
+      22
+    ],
+    "vegetables": [
+      498,
+      502
+    ],
+    "darkVegetables": [
+      248,
+      252
+    ],
+    "wholeGrainsAndBeans": [
+      70,
+      150
+    ],
+    "dairy": [
+      350,
+      500
+    ],
+    "egg": [
+      50,
+      50
+    ],
+    "nuts": [
+      10,
+      15
+    ]
+  },
+  "extraKcal": [
+    343.2,
+    343.2
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "foodCount": 39,
+      "fishMeals": 3,
+      "fishGrams": 300,
+      "foods": [
+        "millet",
+        "pumpkin",
+        "egg",
+        "milk",
+        "apple",
+        "rice",
+        "chicken",
+        "carrot",
+        "bok-choy",
+        "kiwi",
+        "walnut",
+        "yam",
+        "tofu",
+        "shiitake",
+        "cabbage",
+        "wintermelon",
+        "oats",
+        "banana",
+        "pork",
+        "zucchini",
+        "orange",
+        "corn",
+        "salmon",
+        "spinach",
+        "radish",
+        "wheat",
+        "tomato",
+        "pear",
+        "beef",
+        "onion",
+        "broccoli",
+        "potato",
+        "green-beans",
+        "eggplant",
+        "lettuce",
+        "cod",
+        "napa",
+        "lentil",
+        "sweet-potato"
+      ]
+    },
+    {
+      "week": 2,
+      "foodCount": 39,
+      "fishMeals": 3,
+      "fishGrams": 300,
+      "foods": [
+        "oats",
+        "sweet-potato",
+        "egg",
+        "tomato",
+        "milk",
+        "pear",
+        "walnut",
+        "rice",
+        "millet",
+        "chicken",
+        "zucchini",
+        "pumpkin",
+        "tofu",
+        "shiitake",
+        "apple",
+        "corn",
+        "lentil",
+        "bok-choy",
+        "spinach",
+        "wheat",
+        "orange",
+        "pork",
+        "napa",
+        "cod",
+        "cabbage",
+        "carrot",
+        "yam",
+        "kiwi",
+        "beef",
+        "celery",
+        "banana",
+        "broccoli",
+        "wintermelon",
+        "lettuce",
+        "radish",
+        "green-beans",
+        "eggplant",
+        "salmon",
+        "onion"
+      ]
+    },
+    {
+      "week": 3,
+      "foodCount": 38,
+      "fishMeals": 3,
+      "fishGrams": 300,
+      "foods": [
+        "oats",
+        "corn",
+        "milk",
+        "egg",
+        "spinach",
+        "kiwi",
+        "rice",
+        "chicken",
+        "broccoli",
+        "carrot",
+        "bok-choy",
+        "tofu",
+        "pumpkin",
+        "banana",
+        "walnut",
+        "wheat",
+        "lentil",
+        "tomato",
+        "cabbage",
+        "millet",
+        "yam",
+        "apple",
+        "pork",
+        "celery",
+        "pear",
+        "salmon",
+        "shiitake",
+        "orange",
+        "beef",
+        "sweet-potato",
+        "zucchini",
+        "napa",
+        "eggplant",
+        "lettuce",
+        "cod",
+        "green-beans",
+        "wintermelon",
+        "radish"
+      ]
+    },
+    {
+      "week": 4,
+      "foodCount": 38,
+      "fishMeals": 3,
+      "fishGrams": 300,
+      "foods": [
+        "wheat",
+        "corn",
+        "egg",
+        "milk",
+        "orange",
+        "chicken",
+        "potato",
+        "onion",
+        "zucchini",
+        "shiitake",
+        "sweet-potato",
+        "banana",
+        "walnut",
+        "rice",
+        "tofu",
+        "tomato",
+        "bok-choy",
+        "napa",
+        "pear",
+        "pork",
+        "broccoli",
+        "spinach",
+        "kiwi",
+        "oats",
+        "cod",
+        "cabbage",
+        "apple",
+        "beef",
+        "pumpkin",
+        "millet",
+        "carrot",
+        "lettuce",
+        "yam",
+        "salmon",
+        "lentil",
+        "green-beans",
+        "eggplant",
+        "wintermelon"
+      ]
+    },
+    {
+      "week": 5,
+      "foodCount": 38,
+      "fishMeals": 3,
+      "fishGrams": 300,
+      "foods": [
+        "rice",
+        "millet",
+        "lentil",
+        "egg",
+        "shiitake",
+        "milk",
+        "apple",
+        "oats",
+        "chicken",
+        "pumpkin",
+        "bok-choy",
+        "kiwi",
+        "walnut",
+        "tofu",
+        "napa",
+        "eggplant",
+        "tomato",
+        "carrot",
+        "corn",
+        "banana",
+        "pork",
+        "radish",
+        "zucchini",
+        "orange",
+        "salmon",
+        "spinach",
+        "wheat",
+        "pear",
+        "beef",
+        "onion",
+        "broccoli",
+        "cabbage",
+        "sweet-potato",
+        "yam",
+        "lettuce",
+        "cod",
+        "celery",
+        "green-beans"
+      ]
+    },
+    {
+      "week": 6,
+      "foodCount": 38,
+      "fishMeals": 3,
+      "fishGrams": 300,
+      "foods": [
+        "millet",
+        "pumpkin",
+        "egg",
+        "milk",
+        "pear",
+        "walnut",
+        "wheat",
+        "chicken",
+        "celery",
+        "shiitake",
+        "radish",
+        "carrot",
+        "tofu",
+        "napa",
+        "apple",
+        "rice",
+        "lentil",
+        "spinach",
+        "tomato",
+        "bok-choy",
+        "oats",
+        "orange",
+        "corn",
+        "pork",
+        "eggplant",
+        "cod",
+        "zucchini",
+        "kiwi",
+        "yam",
+        "beef",
+        "banana",
+        "broccoli",
+        "lettuce",
+        "sweet-potato",
+        "cabbage",
+        "potato",
+        "onion",
+        "salmon"
+      ]
+    }
+  ],
+  "checks": {
+    "passed": true,
+    "days": 42,
+    "profiles": 2,
+    "menusChecked": 84,
+    "mainRecipes": 38,
+    "maxMainRepeats": 3,
+    "lunchStarches": 8,
+    "breakfastStarches": 15
+  },
+  "note": "These checks validate portions, variety and arithmetic. They do not establish individual nutritional adequacy or clinical efficacy."
+}
