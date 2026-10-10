@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">两种出生路径概念示意</title><desc id="desc">左图阴道分娩经宫颈及阴道。右图剖宫产经腹壁及子宫切口。示意省略骨盆等结构，不按比例，也不是手术操作图。</desc>
+  <defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9" fill="#236369"/></marker></defs>
+  <rect width="900" height="430" rx="12" fill="#f5f8fc"/>
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif" fill="#152b46" text-anchor="middle">
+    <text x="225" y="45" font-size="28" font-weight="bold">阴道分娩</text><text x="675" y="45" font-size="28" font-weight="bold">剖宫产</text>
+    <g fill="#fbe9e0" stroke="#b57254" stroke-width="5"><path d="M155 245C120 215 115 130 158 98C195 69 255 69 292 98C335 130 330 215 295 245L250 273V337H200V273Z"/><path d="M605 245C570 215 565 130 608 98C645 69 705 69 742 98C785 130 780 215 745 245L700 273V337H650V273Z"/></g>
+    <g fill="#fff" stroke="#dba98e" stroke-width="3"><ellipse cx="225" cy="164" rx="42" ry="55"/><circle cx="225" cy="229" r="30"/><ellipse cx="675" cy="164" rx="42" ry="55"/><circle cx="675" cy="229" r="30"/></g>
+    <g font-size="22"><text x="82" y="156">子宫</text><text x="81" y="277">宫颈</text><text x="338" y="316">阴道</text><text x="811" y="136">腹壁</text><text x="814" y="281">子宫切口</text></g>
+    <g stroke="#586b7f" stroke-width="2" fill="none"><path d="M112 150H129"/><path d="M112 270H194"/><path d="M310 310H257"/><path d="M782 140L755 195"/><path d="M812 259L744 222"/></g>
+    <path d="M225 270V367" fill="none" stroke="#236369" stroke-width="6" marker-end="url(#arrow)"/>
+    <path d="M710 221H826" fill="none" stroke="#236369" stroke-width="6" marker-end="url(#arrow)"/>
+    <path d="M744 205V238" stroke="#9a492a" stroke-width="6"/><path d="M780 85C812 115 812 306 780 338" fill="none" stroke="#b6c8d6" stroke-width="4"/>
+    <g font-size="22" fill="#586b7f"><text x="225" y="409">经宫颈与阴道娩出</text><text x="675" y="409">经腹壁与子宫切口娩出</text></g>
+  </g>
+</svg>

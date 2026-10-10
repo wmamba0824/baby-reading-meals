@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" role="img" aria-labelledby="title desc">
+  <title id="title">WHO 产后照护接触时点</title><desc id="desc">建议至少四次产后照护接触：出生后首24小时，48至72小时，7至14天和第6周。按母婴需要增加，不是康复完成期限。</desc>
+  <rect width="900" height="240" rx="12" fill="#f5f8fc"/>
+  <path d="M110 94H790" stroke="#b8d3cf" stroke-width="5"/>
+  <g fill="#236369"><circle cx="110" cy="94" r="14"/><circle cx="337" cy="94" r="14"/><circle cx="563" cy="94" r="14"/><circle cx="790" cy="94" r="14"/></g>
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif" text-anchor="middle">
+    <g font-size="27" fill="#152b46" font-weight="bold"><text x="110" y="60">首 24 小时</text><text x="337" y="60">48～72 小时</text><text x="563" y="60">7～14 天</text><text x="790" y="60">第 6 周</text></g>
+    <g font-size="22" fill="#586b7f"><text x="110" y="145">出生后的照护</text><text x="337" y="145">早期接触</text><text x="563" y="145">再次随访</text><text x="790" y="145">综合复查</text><text x="450" y="208">按母婴需要安排更多照护 · 有症状时不等复查日</text></g>
+  </g>
+</svg>

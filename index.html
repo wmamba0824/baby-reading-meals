@@ -2,14 +2,23 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="100 天原创陪伴朗读与 42 天月子餐，哺乳和不哺乳参考、营养估算、每日详细做法与科学依据。">
+  <meta name="description" content="100 天陪伴朗读、42 天月子餐与生产指南：分娩方式、产前产后照护、普通与特需选择及可核查依据。">
   <meta name="theme-color" content="#152b46"><title>Baby · 育儿与陪伴</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23152b46'/%3E%3Cpath d='M7 8h8v17H7zm10 0h8v17h-8' fill='%23f4cb76'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261007-scroll-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261007-2"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-birth-1"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261011-birth-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261007-2"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script><script defer src="birth-data.js?v=20261011-birth-1"></script><script defer src="birth-checklist.js?v=20261011-birth-1"></script><script defer src="birth-ui.js?v=20261011-birth-1"></script>
 </head>
 <body>
   <header class="header"><a class="brand" href="#" aria-label="Baby 首页"><span class="brand-icon" aria-hidden="true">✦</span> Baby</a><span class="header-note">陪伴宝宝，照顾自己</span></header>
-  <nav class="section-nav" aria-label="项目功能"><a id="stories-nav" href="#" aria-current="page">育儿故事</a><a id="meals-nav" href="#meals">月子餐</a></nav>
+  <nav class="section-nav" aria-label="项目功能"><a id="stories-nav" href="#" aria-current="page">育儿故事</a><a id="meals-nav" href="#meals">月子餐</a><a id="birth-nav" href="#birth">生产指南</a></nav>
+  <main id="birth" class="library birth-guide" hidden>
+    <section class="intro birth-intro"><div><p class="eyebrow">了解选择，做好准备</p><h1>生产指南</h1><p class="intro-text">顺产与剖宫产 · 产前产后 · 普通产科与特需</p></div><div class="daily-note"><span>一起做好准备</span><strong>理解过程<br>照顾自己</strong><small>权威资料 · 实用整理</small></div></section>
+    <p class="birth-scope">资料核查 2026-10-11 · 用于了解与就诊讨论。分娩方案由本人和产科团队结合当前检查共同决定。</p>
+    <details class="birth-warning"><summary>先认清需要及时就医的信号</summary><div><p><strong>明显出血、胎动明显减少或破水：</strong>及时联系产科急诊并按要求就诊，不等固定宫缩间隔。持续剧烈头痛或腹痛、视物异常、发热 ≥38℃、单侧腿肿痛等也应立即联系医护。</p><p><strong>严重出血、晕厥、胸痛、呼吸困难或即刻伤害风险：</strong>拨打 120，请可信的人陪伴。产后大出血或伤害自己／宝宝的念头也须马上求助。不要等产后复查。</p><p>警示症状可能出现在孕期和产后一年内；此处不是完整急症清单，拿不准或感觉不对时也应联系医护。依据：<a href="https://www.cdc.gov/hearher/maternal-warning-signs/index.html" target="_blank" rel="noopener noreferrer">CDC HEAR HER</a>、<a href="https://www.nhs.uk/pregnancy/labour-and-birth/the-stages-of-labour-and-birth/" target="_blank" rel="noopener noreferrer">NHS 临产联系指引</a>。</p></div></details>
+    <nav id="birth-topics" class="birth-topics" aria-label="生产指南主题"></nav>
+    <article id="birth-panel" class="birth-panel" aria-live="off"></article>
+    <noscript><p>开启浏览器 JavaScript 后可查看主题及生成就诊清单。紧急警示症状见上方说明。</p></noscript>
+    <footer>简短整理用于沟通，不能替代检查或个人医嘱。每节附原文依据；家属清单为本站实用整理。</footer>
+  </main>
   <main id="meals" class="library" hidden>
     <section class="intro meal-intro"><div><p class="eyebrow">三餐与两次加餐</p><h1>42 天月子餐</h1><p class="intro-text">按天选菜单，点开菜名看用量与做法。</p></div><div class="daily-note"><span>6 周家常安排</span><strong>每日菜单<br>详细做法</strong><small>普通饮食 · 灵活调整</small></div></section>
     <p class="plan-note">2026-10-07 更新 · 42 天重新编排，38 种主菜轮换。成人恢复普通饮食后的参考，按需要和医嘱调整。</p>

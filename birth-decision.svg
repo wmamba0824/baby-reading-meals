@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" role="img" aria-labelledby="title desc">
+  <title id="title">分娩与服务选择的讨论路径</title><desc id="desc">先评估母婴情况，再讨论分娩方式，结合个人意愿选择有相应保障的医院及服务。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#236369"/></marker></defs>
+  <rect width="900" height="240" rx="12" fill="#f5f8fc"/>
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif" text-anchor="middle" fill="#152b46">
+    <g fill="#fff" stroke="#c6d5df" stroke-width="2"><rect x="20" y="45" width="245" height="140" rx="16"/><rect x="325" y="45" width="245" height="140" rx="16"/><rect x="630" y="45" width="245" height="140" rx="16"/></g>
+    <g font-size="27" font-weight="bold"><text x="142" y="88">母婴评估</text><text x="447" y="88">共同讨论</text><text x="752" y="88">核实服务</text></g>
+    <g font-size="22" fill="#586b7f"><text x="142" y="126">孕周 · 检查 · 既往史</text><text x="142" y="160">现有风险与接诊能力</text><text x="447" y="126">阴道分娩／剖宫产</text><text x="447" y="160">利弊 · 偏好 · 备选方案</text><text x="752" y="126">普通／特需的具体内容</text><text x="752" y="160">应急 · 镇痛 · 费用</text></g>
+  </g>
+  <g stroke="#236369" stroke-width="3" marker-end="url(#arrow)"><path d="M277 115H310"/><path d="M582 115H615"/></g>
+</svg>

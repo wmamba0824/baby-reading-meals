@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" role="img" aria-labelledby="title desc">
+  <title id="title">胎盘与宫颈内口的位置概念</title><desc id="desc">左图胎盘没有遮挡宫颈内口，右图胎盘覆盖宫颈内口。红色表示胎盘，位置和诊断需要超声及医生确定。</desc>
+  <rect width="900" height="330" rx="12" fill="#f5f8fc"/>
+  <g font-family="Microsoft YaHei, PingFang SC, sans-serif" fill="#152b46" text-anchor="middle">
+    <g font-size="26" font-weight="bold"><text x="225" y="42">未遮挡内口</text><text x="675" y="42">覆盖内口</text></g>
+    <g fill="#fbe9e0" stroke="#b57254" stroke-width="5"><path d="M155 225C118 192 120 112 158 87C196 65 254 65 292 87C330 112 332 192 295 225L250 245V280H200V245Z"/><path d="M605 225C568 192 570 112 608 87C646 65 704 65 742 87C780 112 782 192 745 225L700 245V280H650V245Z"/></g>
+    <path d="M143 109Q121 143 143 182" fill="none" stroke="#bf544b" stroke-width="17" stroke-linecap="round"/>
+    <path d="M628 221Q675 259 722 221" fill="none" stroke="#bf544b" stroke-width="17" stroke-linecap="round"/>
+    <g font-size="22"><text x="68" y="151">胎盘</text><text x="82" y="258">内口</text><text x="812" y="238">胎盘</text></g>
+    <g fill="none" stroke="#586b7f" stroke-width="2"><path d="M98 145H129"/><path d="M112 252L208 239"/><path d="M782 232H738"/></g>
+    <g fill="#236369"><circle cx="225" cy="240" r="5"/><circle cx="675" cy="240" r="5"/></g>
+    <text x="450" y="317" font-size="21" fill="#586b7f">红色为胎盘 · 实际位置须由超声与医生确定</text>
+  </g>
+</svg>

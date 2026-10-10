@@ -1,0 +1,10 @@
+{
+  "name": "baby-reading-meals",
+  "private": true,
+  "scripts": {
+    "test:birth": "node --test tests/birth-checklist.test.cjs tests/birth-ui.test.cjs",
+    "test:navigation": "node tests/meal-navigation.test.cjs",
+    "test:meals": "node tests/run-meal-audit.cjs"
+  },
+  "devDependencies": { "jsdom": "26.1.0" }
+}
