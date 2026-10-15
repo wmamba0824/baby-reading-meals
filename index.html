@@ -2,14 +2,25 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="100 天陪伴朗读、42 天月子餐与生产指南：分娩方式、产前产后照护、普通与特需选择及可核查依据。">
+  <meta name="description" content="Baby：100 天陪伴朗读、生产指南、42 天月子餐与母婴产后时间轴。按时间查宝宝筛查、接种和照护，以及妈妈复诊与恢复事项。">
   <meta name="theme-color" content="#152b46"><title>Baby · 育儿与陪伴</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23152b46'/%3E%3Cpath d='M7 8h8v17H7zm10 0h8v17h-8' fill='%23f4cb76'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=20261011-birth-1"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261011-birth-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261007-2"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script><script defer src="birth-data.js?v=20261011-birth-1"></script><script defer src="birth-checklist.js?v=20261011-birth-1"></script><script defer src="birth-ui.js?v=20261011-birth-1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261015-postpartum-1"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261015-postpartum-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261007-2"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script><script defer src="birth-data.js?v=20261011-birth-1"></script><script defer src="birth-checklist.js?v=20261011-birth-1"></script><script defer src="birth-ui.js?v=20261011-birth-1"></script>
+  <script defer src="postpartum-data.js?v=20261015-postpartum-1"></script><script defer src="postpartum-ui.js?v=20261015-postpartum-1"></script>
 </head>
 <body>
   <header class="header"><a class="brand" href="#" aria-label="Baby 首页"><span class="brand-icon" aria-hidden="true">✦</span> Baby</a><span class="header-note">陪伴宝宝，照顾自己</span></header>
-  <nav class="section-nav" aria-label="项目功能"><a id="stories-nav" href="#" aria-current="page">育儿故事</a><a id="meals-nav" href="#meals">月子餐</a><a id="birth-nav" href="#birth">生产指南</a></nav>
+  <nav class="section-nav" aria-label="项目功能"><a id="stories-nav" href="#" aria-current="page">育儿故事</a><a id="birth-nav" href="#birth">生产指南</a><a id="meals-nav" href="#meals">月子餐</a><a id="postpartum-nav" href="#postpartum">产后时间轴</a></nav>
+  <main id="postpartum" class="library postpartum-guide" hidden>
+    <section class="intro postpartum-intro"><div><p class="eyebrow">出生以后，一起慢慢适应</p><h1 id="postpartum-main-title">产后时间轴</h1><p class="intro-text">宝宝的筛查与照护 · 妈妈的复诊与恢复</p></div><div class="daily-note"><span>从出生到产后随访</span><strong>看准时间<br>记住要事</strong><small>宝宝与妈妈 · 分开查阅</small></div></section>
+    <p class="postpartum-scope">资料核查 2026-10-15 · 时间窗用于提醒，不是每个家庭都相同的医嘱。早产、住院治疗或有合并症时，采用出院计划；异常情况不等时间表。</p>
+    <details class="postpartum-warning"><summary>宝宝／妈妈出现哪些情况，不能等下次检查？</summary><div id="postpartum-alerts"></div><p>明显危急时拨打 120；其他警示症状也须立即联系接诊医院。此处不能排除所有急症。</p></details>
+    <nav id="postpartum-stages" class="postpartum-stages" aria-label="选择产后时间段"></nav>
+    <div id="postpartum-audiences" class="postpartum-audiences" role="group" aria-label="选择查看宝宝或妈妈"></div>
+    <article id="postpartum-panel" class="postpartum-panel" aria-live="off"></article>
+    <noscript><p>开启 JavaScript 后可按时间查看全部内容。新生儿呼吸困难、反应差，或妈妈严重出血、胸痛、呼吸困难等情况，请立即就医。</p></noscript>
+    <footer>按时间整理的通用照护参考。具体项目、补采、复查与接种由医院和当地妇幼／接种门诊确认。餐谱请使用“月子餐”标签。</footer>
+  </main>
   <main id="birth" class="library birth-guide" hidden>
     <section class="intro birth-intro"><div><p class="eyebrow">了解选择，做好准备</p><h1>生产指南</h1><p class="intro-text">顺产与剖宫产 · 产前产后 · 普通产科与特需</p></div><div class="daily-note"><span>一起做好准备</span><strong>理解过程<br>照顾自己</strong><small>权威资料 · 实用整理</small></div></section>
     <p class="birth-scope">资料核查 2026-10-11 · 用于了解与就诊讨论。分娩方案由本人和产科团队结合当前检查共同决定。</p>

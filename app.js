@@ -87,11 +87,14 @@
     current = story || null;
     const isMeals = /^#meals(?:\/day\/\d+)?$/.test(location.hash);
     const isBirth = /^#birth(?:\/[a-z-]+)?$/.test(location.hash);
+    const isPostpartum = location.hash === '#postpartum' || location.hash.startsWith('#postpartum/');
     const enteringMeals = isMeals && $('meals').hidden;
     const enteringBirth = isBirth && $('birth').hidden;
-    $('library').hidden = !!story || isMeals || isBirth; $('reader').hidden = !story; $('meals').hidden = !isMeals; $('birth').hidden = !isBirth;
-    const activeNav = isBirth ? 'birth-nav' : isMeals ? 'meals-nav' : 'stories-nav';
-    for (const navId of ['stories-nav', 'meals-nav', 'birth-nav']) { $(navId).toggleAttribute('aria-current', navId === activeNav); if (navId === activeNav) $(navId).setAttribute('aria-current', 'page'); }
+    const enteringPostpartum = isPostpartum && $('postpartum').hidden;
+    $('library').hidden = !!story || isMeals || isBirth || isPostpartum; $('reader').hidden = !story; $('meals').hidden = !isMeals; $('birth').hidden = !isBirth; $('postpartum').hidden = !isPostpartum;
+    const activeNav = isPostpartum ? 'postpartum-nav' : isBirth ? 'birth-nav' : isMeals ? 'meals-nav' : 'stories-nav';
+    for (const navId of ['stories-nav', 'birth-nav', 'meals-nav', 'postpartum-nav']) { $(navId).toggleAttribute('aria-current', navId === activeNav); if (navId === activeNav) $(navId).setAttribute('aria-current', 'page'); }
+    if (isPostpartum) { restoring = false; document.title = '产后时间轴 · Baby'; if (enteringPostpartum) window.scrollTo(0, 0); return; }
     if (isBirth) { restoring = false; document.title = '生产指南 · Baby'; if (enteringBirth) window.scrollTo(0, 0); return; }
     if (isMeals) { restoring = false; document.title = '42 天月子餐 · Baby'; if (enteringMeals) window.scrollTo(0, 0); return; }
     if (!story) { restoring = false; document.title = 'Baby · 育儿与陪伴'; render(); window.scrollTo(0, 0); if (id) { toast('这个故事不存在，已返回书架。'); history.replaceState(null, '', location.pathname + location.search); } return; }
