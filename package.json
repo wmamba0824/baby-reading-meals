@@ -2,6 +2,7 @@
   "name": "baby-reading-meals",
   "private": true,
   "scripts": {
+    "test:today": "node --test tests/today-ui.test.cjs",
     "test:birth": "node --test tests/birth-checklist.test.cjs tests/birth-ui.test.cjs",
     "test:postpartum": "node --test tests/postpartum-ui.test.cjs",
     "test:navigation": "node tests/meal-navigation.test.cjs",

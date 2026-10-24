@@ -38,7 +38,7 @@ function setup(hash = '#postpartum') {
     close: () => dom.window.close()};
 }
 function assertExclusive(s, visible) {
-  for (const id of ['library', 'reader', 'meals', 'birth', 'postpartum']) {
+  for (const id of ['home', 'library', 'reader', 'meals', 'birth', 'postpartum']) {
     assert.equal(s.$(id).hidden, id !== visible, `${id} visibility when ${visible} is active`);
   }
 }
@@ -49,7 +49,7 @@ test('Postpartum direct link renders the real chronology and is the sole visible
   assertExclusive(s, 'postpartum');
   assert.equal(s.$('postpartum-nav').getAttribute('aria-current'), 'page');
   assert.deepEqual([...s.w.document.querySelectorAll('.section-nav a')].map(link => link.id),
-    ['stories-nav', 'birth-nav', 'meals-nav', 'postpartum-nav']);
+    ['today-nav', 'stories-nav', 'birth-nav', 'meals-nav', 'postpartum-nav']);
   assert.deepEqual([...s.$('postpartum-panel').querySelectorAll('[data-stage]')].map(node => node.dataset.stage),
     [...guide.stages].map(stage => stage.id));
   assert.equal(s.cards().length, guide.stages.reduce((sum, stage) => sum + stage.items.length, 0));

@@ -32,6 +32,7 @@ function verify(source) {
   const window = {
     STORIES: [], innerHeight: 800, scrollY: 640,
     addEventListener(name, handler) { if (!listeners.has(name)) listeners.set(name, []); listeners.get(name).push(handler); },
+    dispatchEvent(event) { for (const handler of listeners.get(event.type) || []) handler(event); return true; },
     scrollTo(x, y) { scrolls.push([x, y]); this.scrollY = y; }
   };
   const document = {
@@ -40,6 +41,7 @@ function verify(source) {
     documentElement: {scrollHeight: 5000, style: {setProperty() {}}}
   };
   const context = vm.createContext({window, document, location,
+    CustomEvent: class { constructor(type, options) { this.type=type; this.detail=options.detail; } },
     localStorage: {getItem() {return null;}, setItem() {}}, history: {replaceState() {}},
     requestAnimationFrame: callback => callback(), setTimeout: () => 0, clearTimeout() {}
   });

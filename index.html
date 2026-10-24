@@ -2,15 +2,50 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Baby：100 天陪伴朗读、生产指南、42 天月子餐与母婴产后时间轴。按时间查宝宝筛查、接种和照护，以及妈妈复诊与恢复事项。">
+  <meta name="description" content="Baby：今日三餐、故事与母婴照护安排，100 天陪伴朗读、生产指南、42 天月子餐与母婴产后时间轴。按时间查宝宝筛查、接种和照护，以及妈妈复诊与恢复事项。">
   <meta name="theme-color" content="#152b46"><title>Baby · 育儿与陪伴</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23152b46'/%3E%3Cpath d='M7 8h8v17H7zm10 0h8v17h-8' fill='%23f4cb76'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=20261015-postpartum-1"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261015-postpartum-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261007-2"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script><script defer src="birth-data.js?v=20261011-birth-1"></script><script defer src="birth-checklist.js?v=20261011-birth-1"></script><script defer src="birth-ui.js?v=20261011-birth-1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261024-today-1"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261024-today-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261024-today-1"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script><script defer src="birth-data.js?v=20261011-birth-1"></script><script defer src="birth-checklist.js?v=20261011-birth-1"></script><script defer src="birth-ui.js?v=20261011-birth-1"></script>
   <script defer src="postpartum-data.js?v=20261015-postpartum-1"></script><script defer src="postpartum-ui.js?v=20261015-postpartum-1"></script>
+  <script defer src="today-model.js?v=20261024-today-1"></script><script defer src="today-ui.js?v=20261024-today-1"></script>
+  <link rel="stylesheet" href="today.css?v=20261024-today-1">
 </head>
 <body>
-  <header class="header"><a class="brand" href="#" aria-label="Baby 首页"><span class="brand-icon" aria-hidden="true">✦</span> Baby</a><span class="header-note">陪伴宝宝，照顾自己</span></header>
-  <nav class="section-nav" aria-label="项目功能"><a id="stories-nav" href="#" aria-current="page">育儿故事</a><a id="birth-nav" href="#birth">生产指南</a><a id="meals-nav" href="#meals">月子餐</a><a id="postpartum-nav" href="#postpartum">产后时间轴</a></nav>
+  <header class="header"><a class="brand" href="#today" aria-label="Baby 首页"><span class="brand-icon" aria-hidden="true">✦</span> Baby</a><span class="header-note">陪伴宝宝，照顾自己</span></header>
+  <nav class="section-nav" aria-label="项目功能"><a id="today-nav" href="#today" aria-current="page">今日</a><a id="stories-nav" href="#stories">育儿故事</a><a id="birth-nav" href="#birth">生产指南</a><a id="meals-nav" href="#meals">月子餐</a><a id="postpartum-nav" href="#postpartum">产后时间轴</a></nav>
+
+  <main id="home" class="library today-home">
+    <section class="today-hero" aria-labelledby="today-heading">
+      <div><p id="today-date" class="eyebrow"></p><h1 id="today-heading">把今天，照顾得暖一点</h1><p id="today-subtitle">三餐、一篇故事，还有妈妈和宝宝的小事。</p><a href="#today-content" class="today-hero-link">看看今天的安排 ↓</a></div>
+      <svg class="today-art" viewBox="0 0 240 180" role="img" aria-label="小熊抱着故事书，坐在月亮旁"><circle cx="175" cy="48" r="34" fill="#f5ce80"/><circle cx="188" cy="35" r="29" fill="#f9f1e5"/><path d="M16 151Q110 125 224 150" fill="none" stroke="#cadbd0" stroke-width="3"/><path d="M28 137q-12-23 5-36m-4 20q14-21 20-12" fill="none" stroke="#8cae96" stroke-width="4" stroke-linecap="round"/><ellipse cx="113" cy="128" rx="48" ry="36" fill="#dcb48e"/><circle cx="82" cy="61" r="17" fill="#c99972"/><circle cx="137" cy="61" r="17" fill="#c99972"/><ellipse cx="110" cy="83" rx="43" ry="37" fill="#e5bf9a"/><ellipse cx="111" cy="96" rx="20" ry="14" fill="#f5dfc6"/><circle cx="95" cy="80" r="3" fill="#4a382f"/><circle cx="126" cy="80" r="3" fill="#4a382f"/><ellipse cx="111" cy="92" rx="5" ry="3" fill="#6e5141"/><path d="M105 100q6 7 12 0" fill="none" stroke="#6e5141" stroke-width="2" stroke-linecap="round"/><path d="M76 113q18-6 35 5q17-11 37-5v39q-20-5-37 4q-17-9-35-4z" fill="#608b87"/><path d="M111 119v35m-26-30 17 4m18 0 18-4" stroke="#d9e8db" stroke-width="2" fill="none"/><ellipse cx="76" cy="129" rx="9" ry="12" fill="#e5bf9a"/><ellipse cx="149" cy="129" rx="9" ry="12" fill="#e5bf9a"/><path d="m45 44 3-7 3 7 7 3-7 3-3 7-3-7-7-3zm155 55 2-5 2 5 5 2-5 2-2 5-2-5-5-2z" fill="#c8a467"/></svg>
+    </section>
+    <p id="today-demo" class="today-demo">先看看示例。设置日期后，这里会变成你家的今日安排；四个原有板块仍可随时查看。</p>
+    <details id="home-settings" class="today-settings"><summary id="home-settings-summary"><span id="home-settings-label">设置你家的今天</span><span class="today-settings-note">只保存在当前浏览器</span></summary>
+      <form id="home-form">
+        <div class="today-fields">
+          <label>目前的阶段<select id="home-phase"><option value="expecting">还在期待 · 未出生</option><option value="born">宝宝已出生</option></select></label>
+          <label id="home-due-field">预产期<input id="home-dueDate" type="date" required></label>
+          <label id="home-birth-field" hidden>实际出生日期<input id="home-birthDate" type="date"></label>
+          <label id="home-feeding-field" hidden>妈妈的餐谱份量<select id="home-feeding"><option value="">请选择参考份量</option><option value="lactating">哺乳参考</option><option value="nonlactating">不哺乳参考</option></select></label>
+        </div>
+        <p class="today-muted">实际出生后手动切换阶段。混合喂养没有固定份量公式，可选择参考后按实际需要调整；菜单用于成人恢复普通饮食后。</p>
+        <details class="today-reading-settings"><summary>独立设置故事的阅读日程</summary><div class="today-fields"><label>阅读开始日期<input id="home-readingStart" type="date" required></label><label>从第几篇开始<input id="home-readingFirst" type="number" min="1" max="100" step="1" required inputmode="numeric"></label></div><p class="today-muted">默认接续当前浏览器的阅读记录。按日期每天顺延一篇，100 篇后从头再读；更改宝宝日期不会重置这个安排。</p></details>
+        <button type="submit" class="today-button">保存，看看今天</button>
+        <p class="today-muted">日期和份量只用于当前浏览器的日程展示，不上传到服务器，也不影响原有故事收藏。换浏览器或清除网站数据后，需要重新设置。</p>
+      </form>
+    </details>
+    <p id="home-status" class="today-status" role="status" aria-live="polite"></p>
+    <div id="today-content" class="today-top-grid">
+      <section class="today-card today-meal-card" aria-labelledby="today-meal-heading"><div class="today-section-heading"><span aria-hidden="true">🥣</span><h2 id="today-meal-heading">今天吃什么</h2></div><div id="today-meals"></div></section>
+      <section class="today-card today-story-card" aria-labelledby="today-story-heading"><div class="today-section-heading"><span aria-hidden="true">📖</span><h2 id="today-story-heading">今天读什么</h2></div><div id="today-story"></div></section>
+    </div>
+    <section class="today-card today-care-section" aria-labelledby="today-care-heading"><div class="today-section-heading"><span aria-hidden="true">🗓️</span><h2 id="today-care-heading">今天留意什么</h2></div><div id="today-care"></div></section>
+    <section class="today-card today-daily-section" aria-labelledby="today-daily-heading"><div class="today-section-heading"><span aria-hidden="true">🌿</span><h2 id="today-daily-heading">照护的小事</h2></div><div id="today-daily" class="today-care-grid"></div></section>
+    <aside class="today-safety"><strong>不舒服时，不必等到某个日子</strong><p>首页只是日程入口，不能判断健康状况。出现异常时按医院指导及时求助，不用等这里的时间安排。</p><a id="today-warning-link" href="#birth">查看孕产期警示情况 →</a><span> · 通用资料的适用范围、来源和核查日期可在各板块查看。</span></aside>
+    <nav class="today-shortcuts" aria-label="查看全部内容"><a href="#stories">全部故事 →</a><a href="#birth">生产指南 →</a><a href="#meals">42 天菜单 →</a><a href="#postpartum">完整产后时间轴 →</a></nav>
+    <footer>今天可以慢一点，照顾宝宝，也照顾自己。</footer>
+    <noscript><p>开启 JavaScript 后可显示今日安排和日期设置。</p></noscript>
+  </main>
   <main id="postpartum" class="library postpartum-guide" hidden>
     <section class="intro postpartum-intro"><div><p class="eyebrow">出生以后，一起慢慢适应</p><h1 id="postpartum-main-title">产后时间轴</h1><p class="intro-text">宝宝的筛查与照护 · 妈妈的复诊与恢复</p></div><div class="daily-note"><span>从出生到产后随访</span><strong>看准时间<br>记住要事</strong><small>宝宝与妈妈 · 分开查阅</small></div></section>
     <p class="postpartum-scope">资料核查 2026-10-15 · 时间窗用于提醒，不是每个家庭都相同的医嘱。早产、住院治疗或有合并症时，采用出院计划；异常情况不等时间表。</p>
@@ -60,7 +95,7 @@
     <details id="community-recipes" class="community-recipes"><summary>公开菜谱参考</summary><p class="meal-note">此独立静态版本保留已有采集资料，不提供实时采集。这里是先前采集的社区分享，仅供烹饪灵感，不能作为营养或医学依据。42 天菜单、分量和做法由本站编排，并非从医院或指南复制的临床处方；更新社区资料不会改动每日安排。</p><div class="meal-controls"><p id="meal-status" role="status">展开后读取公开菜谱</p><button id="refresh-meals" class="primary">实时采集需后端服务</button></div><div id="meal-error" class="meal-error" role="alert" hidden></div><div id="meal-grid" class="story-grid"></div><div id="meal-empty" class="empty" hidden><h2>还没有采集到公开菜谱</h2><p>点击“更新公开菜谱”获取资料，来源不可访问时可稍后重试。</p></div></details>
     <footer>家常菜单与做法为本站整理。公开资料保留作者与原文链接。</footer>
   </main>
-  <main id="library" class="library">
+  <main id="library" class="library" hidden>
     <section class="intro"><div><p class="eyebrow">每天一篇，慢慢读</p><h1>100 天陪伴朗读</h1><p class="intro-text">普通说话声，舒服地读；今天想从哪一篇开始？</p></div><div class="daily-note"><span>亲子共读</span><strong>一个故事<br>一段陪伴</strong><small>原创文字 · 自由阅读</small></div></section>
     <p class="plan-note">开始当天算第 1 天，按固定顺序阅读；可重复、跳过或休息。天数是阅读安排，不是孕周。</p>
     <details class="plan-guidance story-evidence"><summary>胎教朗读的科学依据与故事选择</summary><div class="guidance-body"><p>这 100 篇为本站原创，不是研究中逐篇验证的“最佳胎教故事”。选择温和的情节、清楚的语言、自然的停顿和陪伴主题，是编辑取舍；它适合家长舒适地朗读，不表示胎儿能理解故事寓意，也没有证据证明能提高智商。</p><p><a href="https://www.nhs.uk/best-start-in-life/baby/baby-basics/bonding-with-your-baby/building-a-close-relationship-with-your-baby/" target="_blank" rel="noopener noreferrer">NHS：与宝宝建立亲近关系</a>介绍孕期说话、朗读和唱歌等陪伴方式。目的可以是家长与宝宝的连接，不需要完成考核或每天追求新的刺激。</p><p><a href="https://www.sciencedirect.com/science/article/pii/0163638386900251" target="_blank" rel="noopener noreferrer">DeCasper 与 Spence（1986），婴儿行为与发展研究</a>观察到新生儿对孕晚期重复听过的朗读片段出现偏好；<a href="https://pubmed.ncbi.nlm.nih.gov/23980148/" target="_blank" rel="noopener noreferrer">Partanen 等（2013），PNAS</a>在小样本实验中观察到产前重复语音暴露与出生后脑电反应的差异。这些结果支持有限的声音学习或熟悉性，不能推导出特定故事最优、内容理解或长期智力提升。</p><p><a href="https://www.cdc.gov/niosh/reproductive-health/prevention/noise.html" target="_blank" rel="noopener noreferrer">CDC/NIOSH：孕期噪声</a>提醒避免很强的噪声和振动。朗读用让你舒服的普通说话声即可，不把扬声器贴在腹部，不刻意提高音量。读累了随时停，出生后也可按宝宝的反应继续一起读。</p><p>顺序从已有陪伴故事逐步延伸到日常相处、自然观察和晚安想象，最后用《第一百扇小门》回望阅读旅程。天数只用于安排和查找，不代表这些主题有医学上的先后优劣。资料核查：2026-10-06。</p></div></details>

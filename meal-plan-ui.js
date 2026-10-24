@@ -5,6 +5,7 @@
   let day = 1;
   let rendered = 0;
   let profile = 'lactating';
+  try { const saved = JSON.parse(localStorage.getItem('baby:feeding:v1')); if (['lactating','nonlactating'].includes(saved)) profile = saved; } catch { /* Use the existing default when storage is unavailable. */ }
   function element(tag, className, text) {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -85,7 +86,7 @@
   }
   $('previous-day').onclick = () => { if (day > 1) choose(day - 1); };
   $('next-day').onclick = () => { if (day < plan.days.length) choose(day + 1); };
-  document.querySelectorAll('[data-feeding]').forEach(button => button.onclick = () => {profile=button.dataset.feeding;render();});
+  document.querySelectorAll('[data-feeding]').forEach(button => button.onclick = () => {profile=button.dataset.feeding; try { localStorage.setItem('baby:feeding:v1',JSON.stringify(profile)); } catch {} render(); window.dispatchEvent(new CustomEvent('baby:feedingchange',{detail:profile}));});
   for (const source of plan.sources) {
     const link = element('a', '', source.title); link.href = source.url; link.target = '_blank'; link.rel = 'noopener noreferrer'; $('plan-sources').append(link);
   }
@@ -97,6 +98,8 @@
     if (day !== rendered) { render(); if (event) $('day-heading').focus({ preventScroll: true }); }
     document.title = `第 ${day} 天月子餐 · Baby`;
   }
+  window.addEventListener('baby:feedingchange', event => { if (['lactating','nonlactating'].includes(event.detail) && profile !== event.detail) { profile = event.detail; if (/^#meals/.test(location.hash)) render(); else rendered = 0; } });
+  window.addEventListener('storage', event => { if (event.key !== 'baby:feeding:v1' && event.key !== null) return; try { const value=JSON.parse(localStorage.getItem('baby:feeding:v1')); if (['lactating','nonlactating'].includes(value) && profile !== value) { profile=value; if (/^#meals/.test(location.hash)) render(); else rendered=0; } } catch {} });
   window.addEventListener('hashchange', route);
   route();
 })();

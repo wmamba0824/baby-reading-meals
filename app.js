@@ -88,12 +88,16 @@
     const isMeals = /^#meals(?:\/day\/\d+)?$/.test(location.hash);
     const isBirth = /^#birth(?:\/[a-z-]+)?$/.test(location.hash);
     const isPostpartum = location.hash === '#postpartum' || location.hash.startsWith('#postpartum/');
+    const isToday = !story && !isMeals && !isBirth && !isPostpartum && location.hash !== '#stories';
+    const enteringToday = isToday && $('home').hidden;
     const enteringMeals = isMeals && $('meals').hidden;
     const enteringBirth = isBirth && $('birth').hidden;
     const enteringPostpartum = isPostpartum && $('postpartum').hidden;
-    $('library').hidden = !!story || isMeals || isBirth || isPostpartum; $('reader').hidden = !story; $('meals').hidden = !isMeals; $('birth').hidden = !isBirth; $('postpartum').hidden = !isPostpartum;
-    const activeNav = isPostpartum ? 'postpartum-nav' : isBirth ? 'birth-nav' : isMeals ? 'meals-nav' : 'stories-nav';
-    for (const navId of ['stories-nav', 'birth-nav', 'meals-nav', 'postpartum-nav']) { $(navId).toggleAttribute('aria-current', navId === activeNav); if (navId === activeNav) $(navId).setAttribute('aria-current', 'page'); }
+    $('home').hidden = !isToday;
+    $('library').hidden = isToday || !!story || isMeals || isBirth || isPostpartum; $('reader').hidden = !story; $('meals').hidden = !isMeals; $('birth').hidden = !isBirth; $('postpartum').hidden = !isPostpartum;
+    const activeNav = isToday ? 'today-nav' : isPostpartum ? 'postpartum-nav' : isBirth ? 'birth-nav' : isMeals ? 'meals-nav' : 'stories-nav';
+    for (const navId of ['today-nav', 'stories-nav', 'birth-nav', 'meals-nav', 'postpartum-nav']) { $(navId).toggleAttribute('aria-current', navId === activeNav); if (navId === activeNav) $(navId).setAttribute('aria-current', 'page'); }
+    if (isToday) { restoring = false; document.title = '今日 · Baby'; if (enteringToday) window.scrollTo(0, 0); if (id) { toast('这个故事不存在，已返回书架。'); history.replaceState(null, '', '#stories'); route(); } return; }
     if (isPostpartum) { restoring = false; document.title = '产后时间轴 · Baby'; if (enteringPostpartum) window.scrollTo(0, 0); return; }
     if (isBirth) { restoring = false; document.title = '生产指南 · Baby'; if (enteringBirth) window.scrollTo(0, 0); return; }
     if (isMeals) { restoring = false; document.title = '42 天月子餐 · Baby'; if (enteringMeals) window.scrollTo(0, 0); return; }
@@ -112,7 +116,7 @@
   document.querySelectorAll('[data-view]').forEach(element => element.addEventListener('click', () => { view = view === element.dataset.view ? 'all' : element.dataset.view; render(); }));
   $('reading-block').onchange = event => { block = Number(event.target.value); render(); };
   $('reset-filter').onclick = () => { category = '全部'; view = 'all'; block = 0; $('reading-block').value = '0'; render(); };
-  $('back').onclick = () => location.hash = '';
+  $('back').onclick = () => location.hash = 'stories';
   $('reader-favorite').onclick = () => current && toggleFavorite(current.id);
   function resizeFont(delta) { rememberProgress(); const progress = current ? records[current.id].progress : 0; fontSize = Math.max(18, Math.min(30, fontSize + delta)); restoring = true; syncReader(); if (current) { const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight); window.scrollTo(0, max * progress); } save(); requestAnimationFrame(() => restoring = false); }
   $('smaller').onclick = () => resizeFont(-2); $('larger').onclick = () => resizeFont(2);
