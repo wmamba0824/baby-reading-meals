@@ -108,6 +108,11 @@
   }
   function renderDaily(state) {
     const panel = $('today-daily'); panel.replaceChildren();
+    const gas = element('article', '', 'today-care-card today-gas-entry');
+    gas.append(element('span', '宝宝', 'today-pill'), element('h3', '宝宝胀气与排气'),
+      element('p', '怎么轻柔拍嗝、蹬腿，喂养时留意什么；先看需要就医的情况，不把所有哭闹都当作胀气。'),
+      link('查看排气与安抚指南 →', '#postpartum/gas/baby', 'today-button'));
+    panel.append(gas);
     if (!configured || !state.born) {
       panel.append(element('p', '给照护留一点空间：今天可以一起读一篇故事，确认谁负责做饭、家务和就诊沟通。', 'today-muted'), link('看看出生后的日常照护 →', '#postpartum/daily')); return;
     }
@@ -168,4 +173,5 @@
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) { render(); scheduleMidnight(); } });
   syncForm(); $('home-settings').open = !configured; render(); scheduleMidnight();
+  window.dispatchEvent(new Event('baby:todayready'));
 })();

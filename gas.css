@@ -1,0 +1,18 @@
+/* Readable care instructions; methods stay optional, warnings stay visible. */
+.postpartum-audiences[hidden]{display:none!important}
+.gas-shortcut,.gas-age-note{padding:16px 20px;border-radius:16px;background:#edf5ef;line-height:1.8;overflow-wrap:anywhere}
+.gas-shortcut small{display:block;color:#53665c;margin-top:4px}
+.gas-warning{padding:20px;border:1px solid #e6c9a8;border-radius:18px;background:#fff6e9;margin:20px 0}
+.gas-warning h3{margin-top:0;color:#754322}
+.gas-warning li,.gas-card li{margin:10px 0;line-height:1.85}
+.gas-section{margin:28px 0}
+.gas-card{background:#fff;border:1px solid #dce5df;border-radius:16px;margin:12px 0;break-inside:avoid}
+.gas-card summary{padding:18px 20px;cursor:pointer;line-height:1.7;font-weight:650}
+.gas-card summary:focus-visible{outline:3px solid #307563;outline-offset:3px;border-radius:14px}
+.gas-kind{display:inline-block;margin-right:12px;font-size:13px;font-weight:500;color:#315c4d;background:#edf5ef;border-radius:8px;padding:2px 8px}
+.gas-card-body{padding:0 20px 18px;line-height:1.85;overflow-wrap:anywhere}
+.gas-card-body p{margin:12px 0}
+.gas-card-body ol,.gas-warning ul{padding-left:1.5em}
+.today-gas-entry{margin-bottom:20px;border-left:4px solid #82ac96}
+@media(max-width:520px){.gas-card summary{padding:16px}.gas-card-body,.gas-warning{padding:16px}.gas-kind{display:table;margin-bottom:6px}.gas-age-note{padding:14px}}
+@media print{.gas-shortcut{display:none}.gas-warning{background:white;border:2px solid #555}.gas-card{break-inside:auto}}

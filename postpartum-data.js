@@ -88,5 +88,45 @@
     mother:['严重出血、晕厥、胸痛或呼吸困难：立即求助，危急时120。出现自伤／伤害宝宝想法也须立即寻求专业评估；有即刻危险时120，并由可信的人陪伴。','持续或剧烈头痛、视力改变、发热≥38℃、剧烈腹痛、恶臭分泌物或单侧小腿红肿痛等，立即联系医护，不等42天。','突然幻觉、妄想、明显混乱或躁狂，需紧急精神与产科评估；不要让本人独自承担，也不要用在线评分排除。'],
     refs:['fever','jaundice','whoCare','maternalWarning','psychosis']
   };
-  window.POSTPARTUM_GUIDE={reviewed:'2026-10-15',sources,stages,daily,alerts};
+  // This addition has its own review date; the original timeline was not re-reviewed.
+  Object.assign(sources, {
+    gasBurp:{name:'NHS：给宝宝拍嗝',url:'https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/breastfeeding/how-to-breastfeed/burping-your-baby/',date:'核查 2026-11-04；页面未列正文审阅日期',scope:'观察喂养中的不适、托住头颈、轻拍与轻揉；不按固定次数强行拍嗝。'},
+    gasUnicef:{name:'UNICEF：拍嗝与轻柔活动',url:'https://www.unicef.org/parenting/child-care/how-to-burp-baby',date:'核查 2026-11-04；页面未列发布日期',scope:'拍嗝姿势、仰卧时轻柔揉腹和蹬腿；舒适照护方法，不保证排气或治疗哭闹。'},
+    gasAap:{name:'美国儿科学会：宝宝排气与常见产品',url:'https://www.healthychildren.org/English/ages-stages/baby/diapers-clothing/pages/Breaking-Up-Gas.aspx',date:'更新 2025-01-07；核查 2026-11-04',scope:'奶嘴流速、轻柔活动与药物证据边界；不据此推荐品牌、常规用药或妈妈普遍忌口。'},
+    gasAapBurp:{name:'美国儿科学会：拍嗝、打嗝与吐奶',url:'https://www.healthychildren.org/English/ages-stages/baby/feeding-nutrition/Pages/baby-burping-hiccups-and-spit-up.aspx',date:'更新 2024-12-31；核查 2026-11-04',scope:'不是每次都能拍出嗝；吃奶哭闹时暂停，以及睡眠仍需平坦仰卧。'},
+    gasColic:{name:'NHS：婴儿肠绞痛与哭闹',url:'https://www.nhs.uk/conditions/colic/',date:'正文审阅 2022-04-26；核查 2026-11-04（页面已超过其标注的计划审阅日期）',scope:'肠绞痛不等同于胀气；安抚、持续症状需评估，以及不常规推荐祛胀气、草药或益生菌产品。'},
+    gasReflux:{name:'NHS：婴儿反流与警示情况',url:'https://www.nhs.uk/conditions/reflux-in-babies/',date:'正文审阅 2025-06-10；核查 2026-11-04',scope:'绿色或带血呕吐、喷射性呕吐、便血、腹部肿胀或触痛、拒奶等须及时评估；不是反流诊断工具。'},
+    gasUrgent:{name:'NHS：婴幼儿何时需要紧急帮助',url:'https://www.nhs.uk/baby/health/when-to-get-urgent-medical-help-for-babies-and-children-under-5/',date:'正文审阅 2026-08-06；核查 2026-11-04',scope:'呼吸、意识、发热、喂养和尿量警示；急救号码按中国大陆写120，不使用英国服务号码。'},
+    gasTummy:{name:'NHS：清醒时的趴卧活动',url:'https://www.nhs.uk/baby/babys-development/play-and-learning/keep-baby-or-toddler-active/',date:'正文审阅 2023-03-09；核查 2026-11-04（页面已超过其标注的计划审阅日期）',scope:'宝宝与照护者都清醒、全程近距离看护、从短时开始；趴卧活动不等于趴睡或排气治疗。'},
+    gasStool:{name:'Cleveland Clinic：婴儿排便协调困难',url:'https://my.clevelandclinic.org/health/diseases/24109-dyschezia',date:'医学审阅 2022-08-25；核查 2026-11-04',scope:'软便前使劲可能与协调尚不成熟有关；需与硬便和其他病因区分，不自行刺激肛门或用通便药。'}
+  });
+  const gas = {
+    reviewed:'2026-11-04',
+    intro:'给出生早期宝宝的通用舒适照护参考。哭闹、扭动或放屁多，不能单独判断为胀气，也不能据此诊断肠绞痛。早产、术后、正在治疗或有特殊喂养安排时，先按医护指导。',
+    warning:[
+      '呼吸困难、嘴唇发青、明显松软或难以唤醒：立即急诊，危急时拨打120。',
+      '绿色或黄绿色呕吐、呕血、便血、反复喷射性呕吐，或肚子明显鼓硬、触碰疼痛：立即就医评估，不继续揉腹、蹬腿或在家等待排气。',
+      '未满3个月体温≥38℃，或拒奶、奶量明显减少、尿量明显减少、持续异常哭声／难安抚，也应立即联系儿科就诊。症状不必全部出现，拿不准时及时求助。'
+    ],
+    warningRefs:['gasReflux','gasUrgent','fever'],
+    sections:[
+      {title:'先分清：哭闹不一定是胀气',items:[
+        item('gas-understand','baby','先观察','看整体状态，不数放屁次数',['先看看是否饿了、尿布需要更换、过热或需要安抚。也留意吃奶、精神、尿布和体重趋势；即使放屁后安静下来，也不能反推所有哭闹都由气体引起。','肠绞痛是排除其他原因后才考虑的哭闹问题，不等于“肠子里有气”。持续或反复难安抚、体重增长不理想，或超过约4个月仍有类似哭闹，应请儿科评估。'],['gasColic']),
+        item('gas-soft-stool','baby','容易混淆','使劲、脸红，但排出的是软便',['有些婴儿在排软便前使劲、哼哼或脸红，可能还在学习协调排便，并不自动等于便秘或需要排气。若便便硬、带血，伴明显腹胀、呕吐或吃奶变差，应就诊判断。','不要自行用棉签、排气管等刺激肛门，也不要为此自行用开塞露或通便药。医生另有治疗安排时按其指导。'],['gasStool'])
+      ]},
+      {title:'可以尝试：一次选一种，舒服就好',items:[
+        {...item('gas-burp','baby','温和拍嗝','托稳头颈，轻揉或轻拍背部',['吃奶中不舒服时可以暂停；吃得平稳时不必为了拍嗝反复打断。喂后也可尝试，拍嗝主要帮助胃里的空气出来，不保证能排出肠道里的气。'],['gasBurp','gasAapBurp']),steps:['把宝宝竖抱靠在肩前，稳稳托住头颈和身体，口鼻保持通畅。照护者保持清醒。','另一只手轻揉或轻拍背部；不要用力拍打或摇晃。','尝试几分钟仍没有嗝、宝宝也舒适，可以结束，不必追求每次都有嗝。入睡后放回平坦、坚实的婴儿睡面，仰卧。']},
+        {...item('gas-bicycle','baby','轻柔活动','仰卧蹬腿与轻揉小肚子',['选择宝宝清醒、平静时，放在安全平坦的表面，成人在旁；刚吃饱、正在吐奶或很抗拒时先不做。这是舒适活动，不是必须完成的排气操。'],['gasUnicef','gasBurp']),steps:['轻托小腿，交替缓慢屈伸，像骑自行车一样，只在宝宝自然舒适的范围活动。','也可用温暖干净的手轻轻揉腹，不深压肚子，不把膝盖用力压向腹部。','哭闹加重、身体绷紧、出现疼痛或吐奶就停下；不要为了“排出一口气”强行重复。']},
+        {...item('gas-tummy-time','baby','清醒看护','短时趴卧，和趴睡分开',['趴卧首先是清醒活动，有时也可能让宝宝更舒服；不是治疗胀气的方法。宝宝和看护者都须清醒，成人全程近距离观察。'],['gasTummy','gasAapBurp']),steps:['新生儿可从趴在清醒成人胸前的短时活动开始，保持脸可见、口鼻不受遮挡；避免照护者在沙发或床上睡着。','按耐受少量多次，不设排气次数或打卡目标。早产、术后或有疾病时先问医护。','宝宝困了或不舒服就结束，睡眠始终先放为仰卧、平坦睡面，不用趴睡、侧睡或抬高床头帮助排气。']}
+      ]},
+      {title:'喂养中减少不舒服',items:[
+        item('gas-feed','baby','各种喂养均可看','先看含接和奶嘴流速',['亲喂、瓶喂和混合喂养都可能吞入空气。吃奶时哭闹先暂停安抚，不硬喂；频繁呛咳、漏奶或明显吞咽急促时，请医护协助查看含接、姿势及奶嘴流速。','配方奶仍严格按产品水粉比例与安全冲调要求准备，不为排气稀释、加浓或加额外粉剂；不要仅凭胀气频繁自行换奶。'],['gasAap','gasAapBurp','formula']),
+        item('gas-products','baby','先问专业人员','不把药物、益生菌当作日常必需品',['西甲硅油缓解肠绞痛的证据不足，不适合在这里给所有宝宝统一推荐或给剂量。益生菌并非所有菌株、所有喂养方式都有相同证据，草药水等也不作为常规方案。是否使用应先让儿科了解具体情况。','妈妈不需要仅因宝宝放屁就大范围忌口。怀疑食物过敏、需要更换特殊配方或调整妈妈饮食时，应先评估，避免影响营养或延误病因判断。'],['gasAap','gasColic'])
+      ]},
+      {title:'总是反复时，带着这些信息问儿科',items:[
+        item('gas-followup','baby','就诊准备','记下规律，比追求立刻放屁更有帮助',['可整理哭闹开始时间、与吃奶或排便的关系、呕吐物颜色、便便性状、湿尿布变化、体重趋势，以及试过的方法。出现警示情况时先就医，不等记录完整。','温和安抚仍反复难受、喂养困难或家长担心时，预约儿科／儿童保健评估。排气方法效果有限，不能用“肠绞痛会自己好”解释所有持续不适。'],['gasColic','gasReflux'])
+      ]}
+    ]
+  };
+  window.POSTPARTUM_GUIDE={reviewed:'2026-10-15',sources,stages,daily,alerts,gas};
 })();

@@ -19,6 +19,7 @@
     {id: 'overview', label: '时间总览'},
     ...guide.stages.map(stage => ({id: stage.id, label: stage.label})),
     {id: 'daily', label: '日常照护'},
+    {id: 'gas', label: '胀气与排气'},
     {id: 'sources', label: '全部依据'}
   ];
 
@@ -86,12 +87,13 @@
   function renderNavigation(view, audience) {
     stageNav.replaceChildren();
     views.forEach(item => {
-      const link = viewLink(item.id, audience, item.label);
+      const link = viewLink(item.id, item.id === 'gas' ? 'baby' : audience, item.label);
       link.dataset.postpartumView = item.id;
       if (view === item.id) link.setAttribute('aria-current', 'page');
       stageNav.append(link);
     });
     audienceNav.replaceChildren();
+    audienceNav.hidden = view === 'gas';
     audiences.forEach(([value, label]) => {
       const link = viewLink(view, value, label);
       link.dataset.postpartumAudience = value;
@@ -110,6 +112,50 @@
     });
     panel.append(list);
   }
+  function renderGas() {
+    const gas = guide.gas;
+    const age = element('p', '', 'gas-age-note');
+    age.id = 'gas-age-note';
+    let note = '未设置实际出生日期也可阅读；在“今日”填写后，这里会显示宝宝日龄。';
+    try {
+      const profile = JSON.parse(localStorage.getItem('baby:today:v1') || 'null');
+      const model = window.BABY_TODAY;
+      if (model && profile && !model.validate(profile)) {
+        const state = model.state(profile);
+        note = state.born ? `当前宝宝日龄 ${state.age} 天 · 出生当天为0天。日龄用于了解背景，不能判断是不是胀气；早产儿按医护的个体方案。` : '尚未登记实际出生日期，可先了解照护方法。出生后在“今日”更新日期即可。';
+      }
+    } catch { /* Reading remains available without browser storage. */ }
+    age.append(document.createTextNode(note + ' '), viewHomeLink());
+    panel.append(age, element('p', gas.intro, 'postpartum-intro'));
+    const warning = element('aside', '', 'gas-warning');
+    warning.setAttribute('aria-labelledby', 'gas-warning-heading');
+    const title = element('h3', '出现这些情况，先就医'); title.id = 'gas-warning-heading';
+    const list = element('ul'); gas.warning.forEach(text => list.append(element('li', text)));
+    warning.append(title, list, references(gas.warningRefs)); panel.append(warning);
+    let count = 0;
+    gas.sections.forEach(group => {
+      const section = element('section', '', 'gas-section');
+      section.append(element('h3', group.title));
+      group.items.forEach(item => {
+        const card = element('details', '', 'gas-card');
+        card.dataset.item = item.id; card.dataset.audience = 'baby';
+        const summary = element('summary');
+        summary.append(element('span', item.kind, 'gas-kind'), element('span', item.title));
+        const body = element('div', '', 'gas-card-body');
+        item.text.forEach(text => body.append(element('p', text)));
+        if (item.steps) {
+          const steps = element('ol'); item.steps.forEach(text => steps.append(element('li', text))); body.append(steps);
+        }
+        body.append(references(item.refs)); card.append(summary, body); section.append(card); count++;
+      });
+      panel.append(section);
+    });
+    panel.append(viewLink('daily', 'baby', '← 查看宝宝日常照护'));
+    return count;
+  }
+  function viewHomeLink() {
+    const link = element('a', '设置／修改出生日期 →'); link.href = '#today'; return link;
+  }
   function render() {
     const hash = location.hash;
     if (hash !== '#postpartum' && !hash.startsWith('#postpartum/')) {
@@ -126,6 +172,10 @@
       view = 'overview';
       audience = 'all';
       history.replaceState(null, '', location.pathname + location.search + '#postpartum');
+    }
+    if (view === 'gas' && audience !== 'baby') {
+      audience = 'baby';
+      history.replaceState(null, '', location.pathname + location.search + routeHash(view, audience));
     }
     renderNavigation(view, audience);
     panel.replaceChildren();
@@ -144,10 +194,12 @@
     actions.append(print);
     header.append(actions);
     panel.append(header);
-    panel.append(element('p', `整理日期：${guide.reviewed} · 当前筛选：${audienceLabels[audience]}`, 'postpartum-print-title'));
+    panel.append(element('p', `整理日期：${view === 'gas' ? guide.gas.reviewed : guide.reviewed} · 当前筛选：${audienceLabels[audience]}`, 'postpartum-print-title'));
     let count = 0;
     if (view === 'sources') {
       renderSources();
+    } else if (view === 'gas') {
+      count = renderGas();
     } else if (view === 'overview') {
       panel.append(element('p', '按出生后的时间顺序查看。医院安排与需要预约的事项请提前确认；日常照护可随时查看，出现警示情况不要等待下一个时间点。', 'postpartum-intro'));
       guide.stages.forEach(item => {
@@ -180,12 +232,29 @@
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
       header.append(status);
-      panel.append(element('p', '时间点用于帮助安排照护，不能代替产科、儿科或社区医护的个体评估。', 'postpartum-intro'));
+      panel.append(element('p', view === 'gas' ? '资料核查：' + guide.gas.reviewed + '。各方法用于温和舒适照护，不保证排气或治疗效果；本页不提供诊断或用药剂量。每项可展开查看原文依据。' : '时间点用于帮助安排照护，不能代替产科、儿科或社区医护的个体评估。', 'postpartum-intro'));
     }
     document.title = `${label} · 产后时间轴 · Baby`;
     heading.focus({preventScroll: true});
   }
   renderAlerts();
+  let printCards = [];
+  window.addEventListener('beforeprint', () => {
+    printCards = [...panel.querySelectorAll('.gas-card')].map(card => [card, card.open]);
+    printCards.forEach(([card]) => { card.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    printCards.forEach(([card, open]) => { card.open = open; }); printCards = [];
+  });
+  window.addEventListener('baby:todayready', () => {
+    if (location.hash.startsWith('#postpartum/gas')) render();
+  });
   window.addEventListener('hashchange', render);
+  window.addEventListener('storage', event => {
+    if ((event.key === 'baby:today:v1' || event.key === null) && location.hash.startsWith('#postpartum/gas')) render();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && location.hash.startsWith('#postpartum/gas')) render();
+  });
   render();
 })();

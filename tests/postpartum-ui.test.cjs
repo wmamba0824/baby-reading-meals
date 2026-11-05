@@ -5,12 +5,13 @@ const path = require('node:path');
 const {JSDOM} = (() => { try { return require('jsdom'); } catch { return require(path.resolve(__dirname, '../../test-runtime/node_modules/jsdom')); } })();
 const dir = path.resolve(__dirname, '..');
 
-function setup(hash = '#postpartum') {
+function setup(hash = '#postpartum', profile) {
   const dom = new JSDOM(fs.readFileSync(path.join(dir, 'index.html'), 'utf8'), {
     url: 'https://example.test/baby/' + hash,
     runScripts: 'outside-only', pretendToBeVisual: true
   });
   const w = dom.window;
+  if (profile !== undefined) w.localStorage.setItem('baby:today:v1', JSON.stringify(profile));
   const errors = [], scrolls = [], storage = [], prints = [], focuses = [];
   w.addEventListener('error', event => errors.push(event.error));
   w.scrollTo = (x, y) => scrolls.push([x, y]);
@@ -59,6 +60,68 @@ test('Postpartum direct link renders the real chronology and is the sole visible
   assert.equal(s.$('postpartum-alerts').querySelectorAll('.postpartum-alert-group').length, 2);
   assert.equal(s.errors.length, 0);
   s.close();
+});
+
+test('Gas guide is available without a birthday; warnings stay visible above expandable methods', () => {
+  const s = setup('#postpartum/gas');
+  assertExclusive(s, 'postpartum');
+  assert.equal(s.w.location.hash, '#postpartum/gas/baby');
+  assert.equal(s.$('postpartum-view-heading').textContent, '胀气与排气');
+  assert.equal(s.$('postpartum-audiences').hidden, true);
+  assert.match(s.$('gas-age-note').textContent, /未设置/);
+  const warning = s.$('postpartum-panel').querySelector('.gas-warning');
+  assert.equal(warning.closest('details'), null, 'Warning must not require expanding a method');
+  for (const signal of ['绿色', '鼓硬', '38℃', '拒奶', '120']) assert.ok(warning.textContent.includes(signal));
+  const cards = s.cards();
+  assert.ok(cards.length >= 8);
+  for (const card of cards) {
+    assert.equal(card.tagName, 'DETAILS');
+    assert.ok(card.querySelector('summary').textContent.length > 0);
+    const links = [...card.querySelectorAll('[data-source]')];
+    assert.ok(links.length > 0);
+    links.forEach(link => assert.equal(link.href, s.w.POSTPARTUM_GUIDE.sources[link.dataset.source].url));
+  }
+  assert.match(s.$('postpartum-panel').textContent, /不必追求每次都有嗝/);
+  assert.match(s.$('postpartum-panel').textContent, /不要自行用棉签/);
+  assert.match(s.$('postpartum-panel').textContent, /睡眠始终先放为仰卧/);
+  cards[0].open = true;
+  const originalOpen = cards.map(card => card.open);
+  s.w.dispatchEvent(new s.w.Event('beforeprint'));
+  assert.ok(cards.every(card => card.open), 'Print must include the closed instruction cards');
+  s.w.dispatchEvent(new s.w.Event('afterprint'));
+  assert.deepEqual(cards.map(card => card.open), originalOpen, 'Printing must preserve the reading selection');
+  assert.equal(s.storage.length, 0);
+  assert.deepEqual(s.errors, []);
+  s.close();
+});
+
+test('Gas guide uses the visitor birthday, handles missing and invalid dates, and does not reset internal scroll', () => {
+  const now = new Date();
+  const date = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  const profile = {phase:'born', birthDate:date, feeding:'lactating', readingStart:date, readingFirst:1};
+  const s = setup('#postpartum/gas/baby', profile);
+  assert.match(s.$('gas-age-note').textContent, /日龄 0 天/);
+  s.navigate('#today');
+  const entry = s.$('today-daily').querySelector('a[href="#postpartum/gas/baby"]');
+  assert.ok(entry, 'Today homepage must link directly to the guide');
+  s.navigate(entry.hash);
+  s.scrolls.length = 0;
+  s.navigate('#postpartum/daily/mother');
+  assert.equal(s.$('postpartum-audiences').hidden, false);
+  const link = s.$('postpartum-stages').querySelector('[data-postpartum-view="gas"]');
+  assert.equal(link.hash, '#postpartum/gas/baby', 'Gas guide remains reachable from the mother filter');
+  s.navigate(link.hash);
+  assert.deepEqual(s.scrolls, []);
+  assert.equal(s.focuses.at(-1).preventScroll, true);
+  assert.deepEqual(s.errors, []);
+  s.close();
+  for (const invalid of [{...profile,birthDate:'2999-01-01'}, {...profile,birthDate:'bad'}, {phase:'expecting'}]) {
+    const other = setup('#postpartum/gas/baby', invalid);
+    assert.match(other.$('gas-age-note').textContent, /未设置/);
+    assert.ok(other.cards().length >= 8);
+    assert.deepEqual(other.errors, []);
+    other.close();
+  }
 });
 
 test('Stage and audience links retain each other without moving the page to the top', () => {
