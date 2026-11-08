@@ -7,19 +7,22 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23152b46'/%3E%3Cpath d='M7 8h8v17H7zm10 0h8v17h-8' fill='%23f4cb76'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css?v=20261024-today-1"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261024-today-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261024-today-1"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script><script defer src="birth-data.js?v=20261011-birth-1"></script><script defer src="birth-checklist.js?v=20261011-birth-1"></script><script defer src="birth-ui.js?v=20261011-birth-1"></script>
   <script defer src="postpartum-data.js?v=20261104-gas-1"></script><script defer src="postpartum-ui.js?v=20261104-gas-1"></script>
-  <script defer src="today-model.js?v=20261024-today-1"></script><script defer src="today-ui.js?v=20261105-home-1"></script>
-  <link rel="stylesheet" href="today.css?v=20261024-today-1">
+  <script defer src="today-model.js?v=20261024-today-1"></script><script defer src="today-ui.js?v=20261108-dashboard-1"></script>
+  <link rel="stylesheet" href="today.css?v=20261108-dashboard-1">
   <link rel="stylesheet" href="gas.css?v=20261104-gas-1">
+  <link rel="stylesheet" href="dashboard.css?v=20261108-dashboard-1">
 </head>
 <body>
   <header class="header"><a class="brand" href="#today" aria-label="Baby 首页"><span class="brand-icon" aria-hidden="true">✦</span> Baby</a><span class="header-note">陪伴宝宝，照顾自己</span></header>
   <nav class="section-nav" aria-label="项目功能"><a id="today-nav" href="#today" aria-current="page">今日</a><a id="stories-nav" href="#stories">育儿故事</a><a id="birth-nav" href="#birth">生产指南</a><a id="meals-nav" href="#meals">月子餐</a><a id="postpartum-nav" href="#postpartum">产后时间轴</a></nav>
 
   <main id="home" class="library today-home">
+    <div class="dashboard-heading"><div><p class="eyebrow">BABY · DAILY DASHBOARD</p><h2>你家的今日看板</h2></div><span>陪伴宝宝，也照顾自己</span></div>
     <section class="today-hero" aria-labelledby="today-heading">
       <div><p id="today-date" class="eyebrow"></p><h1 id="today-heading">把今天，照顾得暖一点</h1><p id="today-subtitle">先照顾妈妈和宝宝，再留一点故事时光。</p><a href="#today-content" class="today-hero-link">看看今天的安排 ↓</a></div>
       <svg class="today-art" viewBox="0 0 240 180" role="img" aria-label="小熊抱着故事书，坐在月亮旁"><circle cx="175" cy="48" r="34" fill="#f5ce80"/><circle cx="188" cy="35" r="29" fill="#f9f1e5"/><path d="M16 151Q110 125 224 150" fill="none" stroke="#cadbd0" stroke-width="3"/><path d="M28 137q-12-23 5-36m-4 20q14-21 20-12" fill="none" stroke="#8cae96" stroke-width="4" stroke-linecap="round"/><ellipse cx="113" cy="128" rx="48" ry="36" fill="#dcb48e"/><circle cx="82" cy="61" r="17" fill="#c99972"/><circle cx="137" cy="61" r="17" fill="#c99972"/><ellipse cx="110" cy="83" rx="43" ry="37" fill="#e5bf9a"/><ellipse cx="111" cy="96" rx="20" ry="14" fill="#f5dfc6"/><circle cx="95" cy="80" r="3" fill="#4a382f"/><circle cx="126" cy="80" r="3" fill="#4a382f"/><ellipse cx="111" cy="92" rx="5" ry="3" fill="#6e5141"/><path d="M105 100q6 7 12 0" fill="none" stroke="#6e5141" stroke-width="2" stroke-linecap="round"/><path d="M76 113q18-6 35 5q17-11 37-5v39q-20-5-37 4q-17-9-35-4z" fill="#608b87"/><path d="M111 119v35m-26-30 17 4m18 0 18-4" stroke="#d9e8db" stroke-width="2" fill="none"/><ellipse cx="76" cy="129" rx="9" ry="12" fill="#e5bf9a"/><ellipse cx="149" cy="129" rx="9" ry="12" fill="#e5bf9a"/><path d="m45 44 3-7 3 7 7 3-7 3-3 7-3-7-7-3zm155 55 2-5 2 5 5 2-5 2-2 5-2-5-5-2z" fill="#c8a467"/></svg>
     </section>
+    <dl id="today-profile" class="dashboard-profile" aria-label="宝宝与今日安排概览"></dl>
     <p id="today-demo" class="today-demo">先看看示例。设置日期后，这里会变成你家的今日安排；四个原有板块仍可随时查看。</p>
     <details id="home-settings" class="today-settings"><summary id="home-settings-summary"><span id="home-settings-label">设置你家的今天</span><span class="today-settings-note">只保存在当前浏览器</span></summary>
       <form id="home-form">
@@ -36,10 +39,11 @@
       </form>
     </details>
     <p id="home-status" class="today-status" role="status" aria-live="polite"></p>
+    <nav class="dashboard-actions" aria-label="今日快捷入口"><a href="#postpartum">🗓️ <span>产后时间轴<small>核对妈妈与宝宝的安排</small></span><b aria-hidden="true">↗</b></a><a id="dashboard-meal-link" href="#meals/day/1">🥣 <span>今日详细餐谱<small>食材份量与做法</small></span><b aria-hidden="true">↗</b></a><a href="#postpartum/gas/baby">🌿 <span>排气与安抚<small>温和照护和就医提示</small></span><b aria-hidden="true">↗</b></a></nav>
     <div id="today-content">
       <section class="today-card today-care-section" aria-labelledby="today-care-heading"><div class="today-section-heading"><span aria-hidden="true">🗓️</span><h2 id="today-care-heading">今天留意什么</h2></div><div id="today-care"></div></section>
-      <section class="today-card today-daily-section" aria-labelledby="today-daily-heading"><div class="today-section-heading"><span aria-hidden="true">🌿</span><h2 id="today-daily-heading">照护的小事</h2></div><div id="today-daily" class="today-care-grid"></div></section>
       <section class="today-card today-meal-card" aria-labelledby="today-meal-heading"><div class="today-section-heading"><span aria-hidden="true">🥣</span><h2 id="today-meal-heading">今天吃什么</h2></div><div id="today-meals"></div></section>
+      <section class="today-card today-daily-section" aria-labelledby="today-daily-heading"><div class="today-section-heading"><span aria-hidden="true">🌿</span><h2 id="today-daily-heading">照护的小事</h2></div><div id="today-daily" class="today-care-grid"></div></section>
       <section class="today-card today-story-card" aria-labelledby="today-story-heading"><div class="today-section-heading"><span aria-hidden="true">📖</span><h2 id="today-story-heading">今天读什么</h2></div><div id="today-story"></div></section>
     </div>
     <aside class="today-safety"><strong>不舒服时，不必等到某个日子</strong><p>首页只是日程入口，不能判断健康状况。出现异常时按医院指导及时求助，不用等这里的时间安排。</p><a id="today-warning-link" href="#birth">查看孕产期警示情况 →</a><span> · 通用资料的适用范围、来源和核查日期可在各板块查看。</span></aside>

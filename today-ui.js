@@ -101,8 +101,10 @@
     panel.append(element('p', state.upcoming ? '近期准备：先了解满月与之后的安排，不表示这些项目今天必须做。' : '按当前日历阶段核对；不是所有事项都要在今天完成。', 'today-muted'));
     const stages = state.stages.map(id => guide.stages.find(item => item.id === id)).filter(Boolean);
     stages.forEach(stage => {
-      const section = element('section', '', 'today-stage');
-      section.append(element('h3', stage.label), element('p', stage.when, 'today-muted'));
+      const section = element('details', '', 'today-stage');
+      const summary = element('summary');
+      summary.append(element('span', stage.label), element('small', `${stage.items.length} 项参考 · 展开查看`));
+      section.append(summary, element('p', stage.when, 'today-muted'));
       const cards = element('div', '', 'today-care-grid');
       // Keep all items in a selected window, including conditional and discharge-based appointments.
       stage.items.forEach(item => cards.append(careCard(item, '#postpartum/' + stage.id + '/' + item.audience)));
@@ -136,6 +138,15 @@
       if (state.remaining <= 0) subtitle += ' 宝宝出生后，请填写实际出生日期再切换阶段。';
     }
     $('today-heading').textContent = title; $('today-subtitle').textContent = subtitle;
+    const overview = $('today-profile'); overview.replaceChildren();
+    const stats = [
+      [configured && state.born ? '出生日期' : '预产期', configured ? calendarLabel(state.born ? profile.birthDate : profile.dueDate) : '等待你填写', '宝宝的小档案'],
+      ['当前阶段', configured ? state.born ? `日龄 ${state.age} 天` : '还在期待' : '尚未设置', configured && state.born ? '出生当天为日龄 0 天' : '按实际情况设置阶段'],
+      ['今日餐谱', state.mealPreview ? '产后菜单预览' : `菜单第 ${state.mealDay} 天`, state.mealCycle ? '42 天后为循环备餐参考' : '成人恢复普通饮食后参考'],
+      ['陪伴阅读', `第 ${state.storyDay} 篇`, '每天一点故事时光']
+    ];
+    stats.forEach(([label, value, note]) => { const item = element('div'); item.append(element('dt', label), element('dd', value), element('small', note)); overview.append(item); });
+    $('dashboard-meal-link').href = '#meals/day/' + state.mealDay;
     $('home-settings-label').textContent = configured ? '修改日期与阅读安排' : '设置你家的今天';
     $('today-demo').hidden = !!configured;
     renderStory(state); renderMeals(state); renderCare(state); renderDaily(state);
