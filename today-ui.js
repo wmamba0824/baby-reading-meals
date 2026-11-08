@@ -6,6 +6,10 @@
   const PROFILE = 'baby:today:v1', FEEDING = 'baby:feeding:v1';
   const read = key => { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; } };
   const civilToday = () => model.todayString();
+  const calendarLabel = value => {
+    const [year, month, day] = value.split('-').map(Number);
+    return `${year} 年 ${month} 月 ${day} 日`;
+  };
   function previousStory() {
     const saved = read('little-story:v1'), records = saved?.records || {};
     const unfinished = window.STORIES.filter(story => records[story.id] && !records[story.id].read)
@@ -123,11 +127,12 @@
   function render() {
     const state = model.state(profile), date = new Date();
     $('today-date').textContent = date.toLocaleDateString('zh-CN', {month: 'long', day: 'numeric', weekday: 'long'});
-    let title = '把今天，照顾得暖一点', subtitle = '三餐、一篇故事，还有妈妈和宝宝的小事。';
-    if (configured && state.born) { title = `和宝宝一起的第 ${state.age + 1} 天`; subtitle = `宝宝日龄 ${state.age} 天 · 出生当天为 0 天，按本机日历日期计算。`; }
+    let title = '把今天，照顾得暖一点', subtitle = '先照顾妈妈和宝宝，再留一点故事时光。';
+    if (configured && state.born) { title = `和宝宝一起的第 ${state.age + 1} 天`; subtitle = `出生日期 ${calendarLabel(profile.birthDate)} · 宝宝日龄 ${state.age} 天。出生当天为 0 天，按本机日历日期计算。`; }
     else if (configured && state.remaining !== null) {
       title = state.remaining > 0 ? `距离预产期还有 ${state.remaining} 天` : state.remaining === 0 ? '今天是预产期，仍然从容准备' : `已过预产期 ${-state.remaining} 天，仍在期待`;
       subtitle = state.gestation >= 0 && state.gestation <= 315 ? `估算孕 ${Math.floor(state.gestation / 7)} 周 + ${state.gestation % 7} 天 · 以产检记录为准。` : '日期仅作日程参考，准确孕周以产检记录为准。';
+      subtitle = `预产期 ${calendarLabel(profile.dueDate)} · ${subtitle}`;
       if (state.remaining <= 0) subtitle += ' 宝宝出生后，请填写实际出生日期再切换阶段。';
     }
     $('today-heading').textContent = title; $('today-subtitle').textContent = subtitle;
