@@ -1,0 +1,19 @@
+name: Baby site checks
+on:
+  push:
+    branches: [main, "codex/skin-future-*"]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - run: node --check skin-data.js && node --check postpartum-ui.js
+      - run: node --test tests/today-ui.test.cjs tests/postpartum-ui.test.cjs tests/birth-ui.test.cjs tests/birth-checklist.test.cjs

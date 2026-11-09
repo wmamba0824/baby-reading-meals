@@ -20,6 +20,7 @@
     ...guide.stages.map(stage => ({id: stage.id, label: stage.label})),
     {id: 'daily', label: '日常照护'},
     {id: 'gas', label: '胀气与排气'},
+    {id: 'skin', label: '瘢痕与妊娠纹'},
     {id: 'sources', label: '全部依据'}
   ];
 
@@ -87,13 +88,13 @@
   function renderNavigation(view, audience) {
     stageNav.replaceChildren();
     views.forEach(item => {
-      const link = viewLink(item.id, item.id === 'gas' ? 'baby' : audience, item.label);
+      const link = viewLink(item.id, item.id === 'gas' ? 'baby' : item.id === 'skin' ? 'mother' : audience, item.label);
       link.dataset.postpartumView = item.id;
       if (view === item.id) link.setAttribute('aria-current', 'page');
       stageNav.append(link);
     });
     audienceNav.replaceChildren();
-    audienceNav.hidden = view === 'gas';
+    audienceNav.hidden = view === 'gas' || view === 'skin';
     audiences.forEach(([value, label]) => {
       const link = viewLink(view, value, label);
       link.dataset.postpartumAudience = value;
@@ -112,8 +113,8 @@
     });
     panel.append(list);
   }
-  function renderGas() {
-    const gas = guide.gas;
+  function renderGas(isSkin = false) {
+    const gas = isSkin ? guide.skin : guide.gas;
     const age = element('p', '', 'gas-age-note');
     age.id = 'gas-age-note';
     let note = '未设置实际出生日期也可阅读；在“今日”填写后，这里会显示宝宝日龄。';
@@ -126,7 +127,8 @@
       }
     } catch { /* Reading remains available without browser storage. */ }
     age.append(document.createTextNode(note + ' '), viewHomeLink());
-    panel.append(age, element('p', gas.intro, 'postpartum-intro'));
+    if (!isSkin) panel.append(age);
+    panel.append(element('p', gas.intro, 'postpartum-intro'));
     const warning = element('aside', '', 'gas-warning');
     warning.setAttribute('aria-labelledby', 'gas-warning-heading');
     const title = element('h3', '出现这些情况，先就医'); title.id = 'gas-warning-heading';
@@ -138,7 +140,7 @@
       section.append(element('h3', group.title));
       group.items.forEach(item => {
         const card = element('details', '', 'gas-card');
-        card.dataset.item = item.id; card.dataset.audience = 'baby';
+        card.dataset.item = item.id; card.dataset.audience = isSkin ? 'mother' : 'baby';
         const summary = element('summary');
         summary.append(element('span', item.kind, 'gas-kind'), element('span', item.title));
         const body = element('div', '', 'gas-card-body');
@@ -150,7 +152,7 @@
       });
       panel.append(section);
     });
-    panel.append(viewLink('daily', 'baby', '← 查看宝宝日常照护'));
+    panel.append(viewLink('daily', isSkin ? 'mother' : 'baby', '← 查看日常照护'));
     return count;
   }
   function viewHomeLink() {
@@ -177,6 +179,10 @@
       audience = 'baby';
       history.replaceState(null, '', location.pathname + location.search + routeHash(view, audience));
     }
+    if (view === 'skin' && audience !== 'mother') {
+      audience = 'mother';
+      history.replaceState(null, '', location.pathname + location.search + routeHash(view, audience));
+    }
     renderNavigation(view, audience);
     panel.replaceChildren();
     const stage = guide.stages.find(item => item.id === view);
@@ -194,10 +200,12 @@
     actions.append(print);
     header.append(actions);
     panel.append(header);
-    panel.append(element('p', `整理日期：${view === 'gas' ? guide.gas.reviewed : guide.reviewed} · 当前筛选：${audienceLabels[audience]}`, 'postpartum-print-title'));
+    panel.append(element('p', `整理日期：${view === 'gas' ? guide.gas.reviewed : view === 'skin' ? guide.skin.reviewed : guide.reviewed} · 当前筛选：${audienceLabels[audience]}`, 'postpartum-print-title'));
     let count = 0;
     if (view === 'sources') {
       renderSources();
+    } else if (view === 'skin') {
+      count = renderGas(true);
     } else if (view === 'gas') {
       count = renderGas();
     } else if (view === 'overview') {

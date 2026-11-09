@@ -27,3 +27,5 @@
 故事用于亲子交流，不承诺胎教提升智力；菜单是营养估算示例，非个人处方。生产指南不能替代检查及个人医嘱。
 
 开发验证：安装 package.json 内开发依赖后，运行 `npm run test:birth`、`npm run test:postpartum`、`npm run test:navigation`、`npm run test:meals`。DOM 测试不证明浏览器视觉布局；发布时另核对匿名可访问的线上资产。
+
+2026-11-09 更新：今日首页采用深蓝科技风 Dashboard。新增 `#postpartum/skin/mother` 瘢痕与妊娠纹护理，逐项附 NHS、AAD 与 Cochrane 来源，资料核查 2026-11-08。切口完全愈合是后续护理的前提，日龄不用于自动判断愈合；不承诺祛疤或消除妊娠纹。

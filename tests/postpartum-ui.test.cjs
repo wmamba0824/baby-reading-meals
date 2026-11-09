@@ -257,3 +257,35 @@ test('Existing birth topics, 84 meal profiles and 100 stories remain accessible 
   assert.equal(s.errors.length, 0);
   s.close();
 });
+
+test('Skin guide normalizes to mother and keeps wound warnings and references available', () => {
+  const s = setup('#postpartum/skin/baby');
+  assertExclusive(s, 'postpartum');
+  assert.equal(s.w.location.hash, '#postpartum/skin/mother');
+  assert.equal(s.$('postpartum-audiences').hidden, true);
+  assert.equal(s.$('postpartum-view-heading').textContent, '瘢痕与妊娠纹');
+  const warning = s.$('postpartum-panel').querySelector('.gas-warning');
+  assert.ok(warning && !warning.closest('details'));
+  assert.match(warning.textContent, /裂开/);
+  assert.equal(s.$('gas-age-note'), null, 'Do not infer maternal wound healing from baby age');
+  assert.equal(s.cards().length, 7);
+  for (const card of s.cards()) {
+    assert.equal(card.dataset.audience, 'mother');
+    assert.ok(card.querySelectorAll('[data-source]').length > 0);
+    for (const a of card.querySelectorAll('[data-source]')) assert.ok(s.w.POSTPARTUM_GUIDE.sources[a.dataset.source]);
+  }
+  assert.match(s.$('postpartum-panel').textContent, /低或极低确定性/);
+  assert.match(s.$('postpartum-panel').textContent, /怀孕期间不使用/);
+  assert.ok(s.w.document.querySelector('.dashboard-actions [href="#postpartum/skin/mother"]'));
+  const card = s.cards()[0];
+  assert.equal(card.open, false);
+  s.w.dispatchEvent(new s.w.Event('beforeprint'));
+  assert.equal(card.open, true);
+  s.w.dispatchEvent(new s.w.Event('afterprint'));
+  assert.equal(card.open, false);
+  s.scrolls.length = 0;
+  s.navigate('#postpartum/daily/mother');
+  assert.equal(s.scrolls.length, 0);
+  assert.equal(s.errors.length, 0);
+  s.close();
+});
