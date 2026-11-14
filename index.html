@@ -6,11 +6,12 @@
   <meta name="theme-color" content="#152b46"><title>Baby · 育儿与陪伴</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23152b46'/%3E%3Cpath d='M7 8h8v17H7zm10 0h8v17h-8' fill='%23f4cb76'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css?v=20261024-today-1"><script defer src="stories.js"></script><script defer src="more-stories.js"></script><script defer src="expanded-stories.js"></script><script defer src="app.js?v=20261024-today-1"></script><script defer src="meal-plan.js?v=20261007-2"></script><script defer src="food-data.js"></script><script defer src="meal-nutrition.js?v=20261007-2"></script><script defer src="meal-plan-ui.js?v=20261024-today-1"></script><script defer src="community-data.js"></script><script defer src="meals.js"></script><script defer src="birth-data.js?v=20261011-birth-1"></script><script defer src="birth-checklist.js?v=20261011-birth-1"></script><script defer src="birth-ui.js?v=20261011-birth-1"></script>
-  <script defer src="postpartum-data.js?v=20261104-gas-1"></script><script defer src="skin-data.js?v=20261109-skin-1"></script><script defer src="postpartum-ui.js?v=20261109-skin-1"></script>
+  <script defer src="postpartum-data.js?v=20261104-gas-1"></script><script defer src="skin-data.js?v=20261109-skin-1"></script><script defer src="postpartum-ui.js?v=20261114-family-1"></script>
   <script defer src="today-model.js?v=20261024-today-1"></script><script defer src="today-ui.js?v=20261108-dashboard-1"></script>
   <link rel="stylesheet" href="today.css?v=20261108-dashboard-1">
   <link rel="stylesheet" href="gas.css?v=20261104-gas-1">
-  <link rel="stylesheet" href="dashboard.css?v=20261114-orbit-2">
+  <link rel="stylesheet" href="dashboard.css?v=20261114-family-1">
+  <script defer src="family-tasks.js?v=20261114-family-1"></script>
 </head>
 <body>
   <header class="header"><a class="brand" href="#today" aria-label="Baby 首页"><span class="brand-icon" aria-hidden="true">✦</span> Baby</a><span class="header-note">陪伴宝宝，照顾自己</span></header>
@@ -24,6 +25,35 @@
     </section>
     <dl id="today-profile" class="dashboard-profile" aria-label="宝宝与今日安排概览"></dl>
     <nav class="dashboard-actions" aria-label="今日快捷入口"><a href="#postpartum">🗓️ <span>产后时间轴<small>核对妈妈与宝宝的安排</small></span><b aria-hidden="true">↗</b></a><a id="dashboard-meal-link" href="#meals/day/1">🥣 <span>今日详细餐谱<small>食材份量与做法</small></span><b aria-hidden="true">↗</b></a><a href="#postpartum/skin/mother">✧ <span>瘢痕与妊娠纹<small>妈妈的皮肤护理指南</small></span><b aria-hidden="true">↗</b></a><a href="#postpartum/gas/baby">🌿 <span>排气与安抚<small>温和照护和就医提示</small></span><b aria-hidden="true">↗</b></a></nav>
+    <section id="family-tasks" class="today-card family-tasks" aria-labelledby="family-tasks-title" tabindex="-1" hidden>
+      <div class="family-tasks-header">
+        <div><h2 id="family-tasks-title">家庭待办</h2><p id="family-count"></p></div>
+        <button type="button" id="family-add" class="today-button">＋ 新建待办</button>
+      </div>
+      <p class="today-muted">记录保存在当前浏览器，换手机或浏览器需要重新填写。</p>
+      <div class="family-filters" role="group" aria-label="待办筛选">
+        <button type="button" data-task-filter="today" aria-pressed="true">今天</button>
+        <button type="button" data-task-filter="upcoming" aria-pressed="false">接下来</button>
+        <button type="button" data-task-filter="all" aria-pressed="false">全部</button>
+      </div>
+      <p id="family-status" role="status"></p>
+      <form id="family-form" hidden>
+        <h3 id="family-form-title">新建待办</h3>
+        <p id="family-guide-hint" class="today-muted" hidden>已带入时间轴事项。请按实际预约或医护安排选择日期。</p>
+        <div class="family-fields">
+          <label>要做什么<input id="family-title" required maxlength="100" placeholder="例如：预约宝宝满月检查"></label>
+          <label>日期<input id="family-date" type="date" required></label>
+          <label>负责人（可选）<input id="family-person" maxlength="24" placeholder="例如：爸爸"></label>
+        </div>
+        <div class="family-form-actions">
+          <button class="today-button" type="submit">保存待办</button>
+          <button type="button" id="family-cancel">取消</button>
+          <button type="button" id="family-delete" hidden>删除待办</button>
+        </div>
+      </form>
+      <p id="family-empty"></p>
+      <ul id="family-list" class="family-list"></ul>
+    </section>
     <p id="today-demo" class="today-demo">先看看示例。设置日期后，这里会变成你家的今日安排；四个原有板块仍可随时查看。</p>
     <details id="home-settings" class="today-settings"><summary id="home-settings-summary"><span id="home-settings-label">设置你家的今天</span><span class="today-settings-note">只保存在当前浏览器</span></summary>
       <form id="home-form">

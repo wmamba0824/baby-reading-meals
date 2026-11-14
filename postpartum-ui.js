@@ -51,7 +51,7 @@
     });
     return paragraph;
   }
-  function renderItem(item, headingLevel) {
+  function renderItem(item, headingLevel, view) {
     const card = element('article', '', 'postpartum-card');
     card.dataset.item = item.id;
     card.dataset.audience = item.audience;
@@ -62,12 +62,18 @@
     card.append(meta, element(headingLevel, item.title));
     item.text.forEach(text => card.append(element('p', text)));
     if (item.refs?.length) card.append(references(item.refs));
+    const addTask = element('button', '加入家庭待办', 'postpartum-add-task');
+    addTask.type = 'button';
+    addTask.dataset.familyTask = item.title;
+    addTask.dataset.familySource = routeHash(view, item.audience);
+    addTask.setAttribute('aria-label', `加入家庭待办：${item.title}`);
+    card.append(addTask);
     return card;
   }
-  function renderItems(items, audience, headingLevel) {
+  function renderItems(items, audience, headingLevel, view) {
     const selected = items.filter(item => audience === 'all' || item.audience === audience);
     const list = element('div', '', 'postpartum-items');
-    selected.forEach(item => list.append(renderItem(item, headingLevel)));
+    selected.forEach(item => list.append(renderItem(item, headingLevel, view)));
     if (!selected.length) list.append(element('p', '这个时间段没有单独列出的相关事项，可查看时间总览或日常照护；具体安排仍按出院医嘱。', 'postpartum-empty'));
     return {list, count: selected.length};
   }
@@ -216,7 +222,7 @@
         const title = element('h3', '', 'postpartum-stage-heading');
         title.append(viewLink(item.id, audience, item.label));
         section.append(title, element('p', item.when, 'postpartum-stage-time'), element('p', item.summary));
-        const result = renderItems(item.items, audience, 'h4');
+        const result = renderItems(item.items, audience, 'h4', item.id);
         count += result.count;
         section.append(result.list);
         panel.append(section);
@@ -225,12 +231,12 @@
       panel.append(daily);
     } else if (view === 'daily') {
       panel.append(element('p', '以下内容贯穿产后照护，不另做月子餐菜单。请结合宝宝情况、妈妈恢复和出院医嘱调整。', 'postpartum-intro'));
-      const result = renderItems(guide.daily, audience, 'h3');
+      const result = renderItems(guide.daily, audience, 'h3', 'daily');
       count = result.count;
       panel.append(result.list);
     } else {
       panel.append(element('p', stage.when, 'postpartum-stage-time'), element('p', stage.summary, 'postpartum-intro'));
-      const result = renderItems(stage.items, audience, 'h3');
+      const result = renderItems(stage.items, audience, 'h3', stage.id);
       count = result.count;
       panel.append(result.list);
       panel.append(viewLink('overview', audience, '← 返回时间总览'), document.createTextNode(' · '), viewLink('daily', audience, '查看日常照护'));

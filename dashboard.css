@@ -34,6 +34,83 @@ body .section-nav{background:#0b1427;border:1px solid #243654;border-radius:14px
 
 .dashboard-hero-art{display:none}
 
+.today-home .family-tasks {
+  margin-bottom:20px;
+  scroll-margin-top:16px;
+  border-top-color:#69cce2;
+}
+.family-tasks[hidden], .family-tasks [hidden] {display:none!important}
+.family-tasks-header {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.family-tasks-header h2 {margin:0;font-size:21px}
+.family-tasks-header p {margin:7px 0 0;color:var(--muted);font-size:13px}
+.family-filters, .family-form-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:14px 0;
+}
+.family-filters button[aria-pressed=true] {
+  background:var(--active);
+  border-color:#638fac;
+  color:#d8f6ff;
+}
+.family-tasks button, .postpartum-add-task {min-height:44px}
+#family-status {color:var(--accent);font-size:14px}
+#family-status:empty, #family-empty:empty {display:none}
+#family-empty {color:var(--muted);font-size:14px}
+#family-form {
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  margin:12px 0;
+  background:var(--paper);
+}
+#family-form h3 {margin:0 0 12px;font-size:17px}
+.family-fields {
+  display:grid;
+  gap:12px;
+  grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);
+}
+.family-fields label {display:grid;gap:6px;min-width:0;font-size:14px}
+.family-fields input {
+  min-height:44px;
+  width:100%;
+  min-width:0;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:9px;
+  font:inherit;
+  background:var(--blue);
+  color:var(--ink);
+}
+.family-list {list-style:none;padding:0;margin:0}
+.family-task {
+  display:grid;
+  grid-template-columns:28px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:10px 0;
+  border-top:1px solid var(--line);
+}
+.family-task input {width:22px;height:22px;accent-color:#70dcec;margin:0;cursor:pointer}
+.family-task strong, .family-task small {display:block;overflow-wrap:anywhere}
+.family-task small {color:var(--muted);margin-top:4px}
+.family-task a {display:inline-block;margin-top:6px;font-size:13px}
+.family-task:has(input:checked) strong {text-decoration:line-through;color:var(--muted)}
+.postpartum-add-task {margin-top:8px}
+@media (max-width:640px) {
+  .family-fields {grid-template-columns:1fr}
+  .family-tasks-header .today-button {padding-inline:10px;font-size:13px}
+}
+@media print {
+  .family-tasks, .postpartum-add-task {display:none!important}
+}
+
 /* Shared screen palette for the library, reader and care guides. */
 @media screen {
   body {

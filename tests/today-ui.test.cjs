@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {JSDOM} = (() => { try { return require('jsdom'); } catch { return require(path.resolve(__dirname, '../../test-runtime/node_modules/jsdom')); } })();
 const dir = path.resolve(__dirname, '..');
-const assets = ['stories.js','more-stories.js','expanded-stories.js','app.js','meal-plan.js','food-data.js','meal-nutrition.js','meal-plan-ui.js','birth-data.js','birth-checklist.js','birth-ui.js','postpartum-data.js','postpartum-ui.js','today-model.js','today-ui.js'];
+const assets = ['stories.js','more-stories.js','expanded-stories.js','app.js','meal-plan.js','food-data.js','meal-nutrition.js','meal-plan-ui.js','birth-data.js','birth-checklist.js','birth-ui.js','postpartum-data.js','skin-data.js','postpartum-ui.js','today-model.js','today-ui.js','family-tasks.js'];
 function setup({hash = '', seed = {}, blocked = false} = {}) {
   const dom = new JSDOM(fs.readFileSync(path.join(dir,'index.html'),'utf8'), {url:'https://example.test/baby/' + hash, runScripts:'outside-only', pretendToBeVisual:true});
   const w = dom.window, errors = [], scrolls = [], writes = [];
@@ -21,6 +21,37 @@ function setup({hash = '', seed = {}, blocked = false} = {}) {
   return {dom,w,$,navigate,fill,errors,scrolls,writes};
 }
 const localDate = (year,month,day) => new Date(year,month-1,day,12);
+
+test('family tasks preserve chosen dates, guide sources and completion across reloads', () => {
+  const key = 'baby:family-tasks:v1';
+  const s = setup({hash:'#postpartum/month-1/baby'});
+  const original = s.$('postpartum-panel').querySelector('[data-family-task]');
+  original.click();
+  assert.equal(s.w.location.hash, '#family-tasks');
+  s.navigate('#family-tasks');
+  assert.equal(s.$('home').hidden, false);
+  assert.equal(s.$('family-title').value, original.dataset.familyTask);
+  assert.equal(s.$('family-date').value, '', 'guide items must not suggest an appointment date');
+  assert.equal(s.w.localStorage.getItem(key), null);
+  s.$('family-date').value = '2099-01-01';
+  s.$('family-person').value = '爸爸';
+  s.$('family-form').requestSubmit();
+  const [record] = JSON.parse(s.w.localStorage.getItem(key));
+  assert.equal(record.date, '2099-01-01');
+  assert.equal(record.person, '爸爸');
+  assert.equal(record.source, '#postpartum/month-1/baby');
+  assert.equal(s.w.document.querySelector('[data-task-filter="upcoming"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(s.$('family-list').querySelector('a').getAttribute('href'), record.source);
+  s.$('family-list').querySelector('input').click();
+  const [finished] = JSON.parse(s.w.localStorage.getItem(key));
+  assert.equal(finished.done, true);
+  assert.equal(s.$('family-list').children.length, 0);
+  const restored = setup({seed:{[key]:[finished]}});
+  assert.equal(restored.$('family-list').querySelector('input').checked, true);
+  assert.equal(restored.errors.length, 0);
+  restored.dom.window.close();
+  s.dom.window.close();
+});
 test('civil dates, leap years and stage boundaries do not depend on elapsed hours', () => {
   const s = setup(), m = s.w.BABY_TODAY;
   assert.equal(m.dateNumber('2024-02-29') + 1, m.dateNumber('2024-03-01'));
