@@ -14,9 +14,9 @@
 
 /* Night dashboard: decorative grid and orbit lines, no medical scoring. */
 @media screen {
-body:has(#home:not([hidden])){background:#080f20;color:#e0eafa;background-image:radial-gradient(ellipse at 85% 0%,#24366d66,transparent 55%),linear-gradient(#68bfff07 1px,transparent 1px),linear-gradient(90deg,#68bfff07 1px,transparent 1px);background-size:auto,40px 40px,40px 40px}
-body:has(#home:not([hidden])) .header{background:transparent;border-color:#263453;color:#e9f3ff}body:has(#home:not([hidden])) .brand{color:#ecf8ff}body:has(#home:not([hidden])) .header-note{color:#9facc8}
-body:has(#home:not([hidden])) .section-nav{background:#0b1427;border:1px solid #243654;border-radius:14px;padding:8px;gap:8px;margin-top:12px}body:has(#home:not([hidden])) .section-nav a{color:#9fb2d2;border-radius:9px}body:has(#home:not([hidden])) .section-nav a[aria-current=page]{background:#19354a;color:#8ceeff;box-shadow:inset 0 0 0 1px #56cddd55}
+body{background:#080f20;color:#e0eafa;background-image:radial-gradient(ellipse at 85% 0%,#24366d66,transparent 55%),linear-gradient(#68bfff07 1px,transparent 1px),linear-gradient(90deg,#68bfff07 1px,transparent 1px);background-size:auto,40px 40px,40px 40px}
+body .header{background:transparent;border-color:#263453;color:#e9f3ff}body .brand{color:#ecf8ff}body .header-note{color:#9facc8}
+body .section-nav{background:#0b1427;border:1px solid #243654;border-radius:14px;padding:8px;gap:8px;margin-top:12px}body .section-nav a{color:#9fb2d2;border-radius:9px}body .section-nav a[aria-current=page]{background:#19354a;color:#8ceeff;box-shadow:inset 0 0 0 1px #56cddd55}
 .today-home{--ink:#e4efff;--muted:#9cadc9;--line:#293b58;color:var(--ink)}
 .dashboard-heading h2{color:#e5f4ff;letter-spacing:1px}.dashboard-heading .eyebrow{color:#71dce6;letter-spacing:3px}.dashboard-heading>span{color:#9cadc9}
 .today-home .today-hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 88% 20%,#46569d55,transparent 65%),linear-gradient(115deg,#13293d,#151d38);border-color:#48668d88;box-shadow:inset 0 1px #adf2ff22,0 12px 48px #0003}
@@ -33,6 +33,95 @@ body:has(#home:not([hidden])) .section-nav{background:#0b1427;border:1px solid #
 }
 
 .dashboard-hero-art{display:none}
+
+/* Shared screen palette for the library, reader and care guides. */
+@media screen {
+  body {
+    --ink:#e4efff;
+    --muted:#a9bad5;
+    --line:#304562;
+    --blue:#192d46;
+    --paper:#121e34;
+    --accent:#8ee9f6;
+    --active:#1c3b55;
+    --warning:#ffd1aa;
+    --warning-surface:#322632;
+    --warning-line:#78576a;
+    --postpartum-accent:var(--accent);
+    color-scheme:dark;
+  }
+  body a {color:var(--accent)}
+  body :is(a, button, summary, input, select, textarea):focus-visible {
+    outline:2px solid #b4edff;
+    outline-offset:3px;
+  }
+  body button, body .reading-order select {
+    background:var(--paper);
+    color:var(--ink);
+  }
+  body button:hover {background:var(--blue)}
+  body .brand-icon {background:#19334e}
+  body .eyebrow {color:#79d9e8}
+  body .intro:not(.today-hero) {
+    padding:clamp(18px,4vw,40px);
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:radial-gradient(ellipse at 90% 0%,#5d53a84d,transparent 63%),linear-gradient(120deg,#142b44,#10192d);
+  }
+  body .plan-note, body .recipe-tip {border:1px solid var(--line)}
+  body :is(.reading-paper,.plan-calendar,.meal-slot,.plan-guidance,.community-recipes,.feeding-choice,.birth-section,.birth-form,.postpartum-card,.postpartum-empty,.gas-card) {
+    background:var(--paper);
+    border-color:var(--line);
+  }
+  body .reading-paper {background:#111b2c}
+  body :is(.continue-section,.toast) {background:#203550;color:var(--ink)}
+  body .continue-section .primary {color:#1b2436}
+  body :is(.primary,.filters button[aria-pressed=true],.week-button[aria-pressed=true],.day-button[aria-pressed=true],.feeding-buttons button[aria-pressed=true]) {
+    background:var(--active);
+    border-color:#638fac;
+    color:#d8f6ff;
+  }
+  body .primary:hover {background:#29516d}
+  body .week-button {background:#18263c}
+  body .favorite-button {color:var(--muted)}
+  body :is(.favorite-button[aria-pressed=true],.ending>span) {color:#ffd278}
+  body :is(.read-status,.guidance-body a,.recipe-data summary,.science-guidance>summary,.recipe-detail[open] .recipe-summary,.birth-live) {color:var(--accent)}
+  body :is(.birth-guide,.postpartum-guide) a {color:var(--accent)}
+  body .birth-guide a:hover {color:#c3f6ff}
+  body :is(.birth-topics,.postpartum-stages,.postpartum-audiences) a, body .postpartum-audiences button {
+    background:var(--paper);
+    color:var(--ink);
+    border-color:var(--line);
+  }
+  body :is(.birth-topics,.postpartum-stages,.postpartum-audiences) a[aria-current=page], body .postpartum-audiences [aria-pressed=true] {
+    background:var(--active);
+    color:#d8f6ff;
+    border-color:#638fac;
+  }
+  body :is(.birth-card,.birth-table thead,.postpartum-audiences,.gas-shortcut,.gas-age-note,.nutrition-panel) {
+    background:#192d46;
+    border-color:var(--line);
+  }
+  body .nutrient {background:#111f34}
+  body .birth-figure {background:var(--paper)}
+  body .birth-figure figcaption, body .gas-shortcut small {color:var(--muted)}
+  body :is(.birth-field input,.birth-field select,.birth-result textarea) {
+    background:#0d192b;
+    color:var(--ink);
+    border-color:#526d8d;
+  }
+  body .birth-result {background:#173344;border-color:#507b85}
+  body :is(.birth-warning,.postpartum-warning,.gas-warning,.meal-error,.birth-result[data-type=urgent]) {
+    background:var(--warning-surface);
+    border-color:var(--warning-line);
+    color:#ffe5d0;
+  }
+  body :is(.birth-warning summary,.postpartum-warning>summary,.gas-warning h3,.birth-form-warning) {color:var(--warning)}
+  body .postpartum-stage::before {border-color:#101b30}
+  body .postpartum-stage-time {color:var(--accent)!important}
+  body :is(.postpartum-badge.is-baby,.gas-kind) {background:#244454;color:#a5efe4}
+  body .postpartum-badge.is-mother {background:#493450;color:#f4ccf6}
+}
 
 @media screen {
   .today-home .today-hero {
